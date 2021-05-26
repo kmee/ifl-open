@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="subtotal_cart_lines_ept" inherit_id="theme_clarico.cart_lines_ept">
+        <xpath expr="//table/thead/tr/th[4]" position="after">
+            <th width="100">Subtotal</th>
+        </xpath>
+        <xpath expr="//td[@class='text-center td-price']" position="after">
+            <td class="text-center" name="price">
+                <t t-set="sub_total" t-value="line.get_subtotal_cart(line.id)"/>
+                <t t-if="(compute_currency(line.product_id.lst_price) - line.price_reduce ) &gt; 0.01  and website.get_current_pricelist().discount_policy=='without_discount'">
+
+                </t>
+                <span t-esc="float(sub_total)" style="white-space: nowrap;" t-options="{&quot;widget&quot;: &quot;monetary&quot;,&quot;display_currency&quot;: website.get_current_pricelist().currency_id}" class="subtotal_show"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>

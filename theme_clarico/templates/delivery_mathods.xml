@@ -1,0 +1,10 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <template id="inherit_delivery_methods" inherit_id="website_sale_delivery.payment_delivery_methods">-->
+
+<!--        <xpath expr="//span" position="after">-->
+<!--            <p class="text-muted">Previsão de entrega dia XX, entre 10h e 20h</p>-->
+<!--        </xpath>-->
+
+<!--    </template>-->
+<!--</odoo>-->

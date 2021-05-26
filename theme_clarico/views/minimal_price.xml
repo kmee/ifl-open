@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="products_item" inherit_id="website_sale.products_item">
+        <!-- Display "From" if variants have distinct extra prices -->
+        <xpath expr="//span[text()='From ']" position="replace">
+            <t t-if="product.has_distinct_variant_price">
+                <span>A partir de </span>
+            </t>
+        </xpath>
+    </template>
+</odoo>

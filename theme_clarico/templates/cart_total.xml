@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--====================== Cart total ======================-->
+    <template id="cart_total" inherit_id="website_sale.total">
+        <xpath expr="//tr[@id='order_total_taxes']" position="replace">
+            <tr>
+                <td class="noborder text-muted"
+                    style="padding-top: 0 !important; margin-top: 0 !important; padding-bottom: 0 !important; margin-bottom: 0 !important;"
+                    colspan="2">
+                    <t t-set="sub_total" t-value="website_sale_order.get_order_subtotal(website_sale_order.id)"/>
+                    <p style="font-size: 0.7rem !important;"> * Neste valor, estão inclusos
+                        o custo dos produtores e
+                        a
+                        contribuição de 35% para o Instituto Feira Livre
+                        (aproximadamente R$ <span t-esc='"%.2f" % float(sub_total * 0.35)'/>).</p>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+</odoo>

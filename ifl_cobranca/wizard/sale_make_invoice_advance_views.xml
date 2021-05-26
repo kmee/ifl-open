@@ -1,0 +1,14 @@
+<!--<?xml version="1.0" encoding="utf-8"?>&lt;!&ndash; Copyright 2020 KMEE-->
+<!--     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). &ndash;&gt;-->
+<!--<odoo>-->
+<!--    <record id="view_picking_form_invoicing_inherit_ifl" model="ir.ui.view">-->
+<!--        <field name="name">stock.picking.form</field>-->
+<!--        <field name="model">stock.picking</field>-->
+<!--        <field name="inherit_id" ref="stock_picking_invoicing.view_picking_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@name='%(stock_picking_invoicing.action_stock_invoice_onshipping)d']" position="replace">-->
+<!--                <button name="prepare_sale_make_invoice" string="Create Invoice" type="object" class="btn-primary" attrs="{'invisible': [('invoice_state', '!=', '2binvoiced')]}"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->
