@@ -14,6 +14,7 @@
         'stock',
         'sale_stock',
         'stock_picking_invoicing',
+        'l10n_br_fiscal',
     ],
     'data': [
         'views/sale_order.xml',
