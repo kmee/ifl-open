@@ -26,12 +26,19 @@ class CieloPreProcessPayment(CieloController):
 
         order_line = request.env['sale.order.line'].sudo()
         donation_product_id = request.env['product.product'].sudo().search(
-            [('donation', '=', True)])
+            [('donation', '=', True)], limit=1)
 
         donation_lines = order.order_line.filtered(
             lambda l: l.product_id.donation == True)
 
         order.order_line = order.order_line - donation_lines
+
+        operation_line = request.env['l10n_br_fiscal.operation.line'].search([
+            ('name', '=', 'Doação')
+        ])
+        uot_id = request.env['l10n_br_fiscal.operation.line'].search([
+            ('name', '=', 'Unidade(s)')
+        ])
 
         donation_order_line_id = order_line.create({
             'product_id': donation_product_id.id,
@@ -39,7 +46,13 @@ class CieloPreProcessPayment(CieloController):
             # 'price_total': order.amount_gross * 0.35,
             'price_unit': 0.35,
             'order_id': order.id,
-            })
+            'fiscal_operation_line_id': operation_line.id,
+            'uot_id': uot_id.id
+        })
+
+        donation_order_line_id._onchange_commercial_quantity()
+
+        # donation_order_line_id._onchange_fiscal_operation_line_id()
 
         return super(CieloPreProcessPayment, self).cielo_s2s_create_json_3ds(
             verify_validity=verify_validity, **kwargs)
