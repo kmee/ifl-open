@@ -33,10 +33,10 @@ class CieloPreProcessPayment(CieloController):
 
         order.order_line = order.order_line - donation_lines
 
-        operation_line = request.sudo().env['l10n_br_fiscal.operation.line'].search([
+        operation_line = request.env['l10n_br_fiscal.operation.line'].sudo().search([
             ('name', '=', 'Doação')
         ])
-        uot_id = request.sudo().env['l10n_br_fiscal.operation.line'].search([
+        uot_id = request.env['l10n_br_fiscal.operation.line'].sudo().search([
             ('name', '=', 'Unidade(s)')
         ])
 
