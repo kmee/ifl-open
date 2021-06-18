@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="import_remote_records_form_view">
+        <field name="name">import.remote.records.form (in ifl_import_records)</field>
+        <field name="model">import.remote.records</field>
+        <field name="arch" type="xml">
+            <form string="Import Remote Records">
+                <group>
+                    <field name="fields_to_import_ids" widget="many2many_tags"/>
+                    <field name="only_new_records"/>
+                    <field name="errors"/>
+                </group>
+                <footer>
+                    <button name="action_import"
+                            string="Import"
+                            class="btn-primary"
+                            type="object"/>
+                    <button name="action_import_fiscal_settings"
+                            string="Import Fiscal Settings"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'product.template'"
+                            type="object"/>
+                    <button name="action_import_partner_categories"
+                            string="Import Partner Categories"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'res.partner'"
+                            type="object"/>
+                    <button name="action_import_partner_city"
+                            string="Import Partner City"
+                            class="btn-primary" type="object"
+                            invisible="context.get('active_model') != 'res.partner'"/>
+                    <button name="action_import_partner_street_number"
+                            string="Import Partner Street Number"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'res.partner'"
+                            type="object"/>
+                    <button name="action_import_images"
+                            string="Import Images"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'product.template'"
+                            type="object"/>
+                    <button name="action_import_variants"
+                            string="Import Variants"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'product.template'"
+                            type="object"/>
+                    <button name="action_import_order_line"
+                            string="Import Lines"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'sale.order'"
+                            type="object"/>
+                    <button name="action_update_order_line_taxes"
+                            string="Update Line Taxes"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'sale.order'"
+                            type="object"/>
+                    <button name="action_update_taxes_after_discount"
+                            string="Update Taxes After Discount"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'sale.order'"
+                            type="object"/>
+                    <button name="action_import_seller_ids"
+                            string="Import Sellers"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'product.template'"
+                            type="object"/>
+                    <button name="action_import_route_ids"
+                            string="Import Routes"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'product.template'"
+                            type="object"/>
+                    <button name="action_import_bom_line_ids"
+                            string="Import Bom Lines"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'mrp.bom'"
+                            type="object"/>
+                    <button name="action_import_inventory"
+                            string="Import Inventory"
+                            class="btn-primary"
+                            invisible="context.get('active_model') != 'stock.inventory'"
+                            type="object"/>
+                    <button name="action_update_records"
+                            string="Update All Records"
+                            class="btn-primary"
+                            type="object"/>
+                    <button name="clear_fields_to_import"
+                            string="Clear Fields"
+                            class="btn-primary"
+                            type="object"/>
+                    <button string="Cancel"
+                            class="btn-default"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="import_remote_product_records_act_window"
+        name="Import Remote Product Records"
+        src_model="product.template"
+        res_model="import.remote.records"
+        view_type="form"
+        view_mode="form"
+        key2="client_action_multi"
+        target="new"/>
+
+</odoo>

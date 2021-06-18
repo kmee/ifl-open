@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="import_records_res_config_settings_form" model="ir.ui.view">
+        <field name="name">res.config.settings.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='multi_company']" position="after">
+                <div id="import_records_config">
+                    <h2>Remote Import Records</h2>
+                    <div class="row mt16 o_settings_container" id="import_records">
+                        <div class="o_setting_left_pane">
+                            <label for="remote_host"/>
+                            <field name="remote_host"/>
+                            <label for="remote_port"/>
+                            <field name="remote_port"/>
+                            <label for="remote_db_name"/>
+                            <field name="remote_db_name"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="remote_login"/>
+                            <field name="remote_login"/>
+                            <label for="remote_password"/>
+                            <field name="remote_password" password="True"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
