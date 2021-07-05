@@ -235,10 +235,12 @@ class ImportRemoteRecords(models.TransientModel):
     @job
     def import_one2many_field(self, local_record, field_name):
         remote = self._get_remote_instance()
-        remote_record_id = local_record.remote_record_id
+        # remote_record_id = local_record.remote_record_id
 
         active_model = local_record._name
         remote_obj = remote.env[active_model]
+
+        remote_record_id = local_record.id
 
         remote_field_values = remote_obj.fields_get().get(field_name)
         comodel_name = remote_field_values.get('relation')
@@ -316,10 +318,7 @@ class ImportRemoteRecords(models.TransientModel):
             local_obj = self.env[active_model]
 
             for local_record in local_obj.search([
-                ('remote_record_id', '!=', False),
-                ('product_image_ids', '=', False)] + [
-                    ('create_date', '>=', fields.Date.today())
-                ] if wizard.only_new_records else [
+                ('product_image_ids', '=', False)
             ]):
                 wizard.with_delay().import_one2many_field(
                     local_record, 'product_image_ids'
