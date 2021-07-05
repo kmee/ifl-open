@@ -240,7 +240,16 @@ class ImportRemoteRecords(models.TransientModel):
         active_model = local_record._name
         remote_obj = remote.env[active_model]
 
-        remote_record_id = local_record.id
+        local_data_id = self.env['ir.model.data'].search([
+            ('model', '=', active_model),
+            ('res_id', '=', local_record.id),
+        ])
+
+        remote_data_id = remote.env['ir.model.data'].search([
+            ('model', '=', active_model),
+            ('name', '=', local_data_id.name),
+        ])
+        remote_record_id = remote_data_id.res_id
 
         remote_field_values = remote_obj.fields_get().get(field_name)
         comodel_name = remote_field_values.get('relation')
