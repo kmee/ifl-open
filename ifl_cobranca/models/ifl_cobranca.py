@@ -309,30 +309,30 @@ class Picking(models.Model):
 
         return result
 
-    # def prepare_sale_make_invoice(self):
-    #     if self.picking_type_code == 'outgoing':
-    #         ctx = {
-    #             'active_model': 'sale.order',
-    #             'active_id': self.sale_id.id,
-    #             'active_ids': self.sale_id.ids,
-    #             }
-    #
-    #         return {
-    #             'type': 'ir.actions.act_window',
-    #             'res_model': "sale.advance.payment.inv",
-    #             'view_type': 'form',
-    #             'view_mode': 'form',
-    #             'target': 'new',
-    #             'context': ctx,
-    #             }
-    #     else:
-    #         return {
-    #             'type': 'ir.actions.act_window',
-    #             'res_model': "stock.invoice.onshipping",
-    #             'view_type': 'form',
-    #             'view_mode': 'form',
-    #             'target': 'new',
-    #             }
+    def prepare_sale_make_invoice(self):
+        if self.picking_type_code == 'outgoing':
+            ctx = {
+                'active_model': 'sale.order',
+                'active_id': self.sale_id.id,
+                'active_ids': self.sale_id.ids,
+                }
+
+            return {
+                'type': 'ir.actions.act_window',
+                'res_model': "sale.advance.payment.inv",
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                'context': ctx,
+                }
+        else:
+            return {
+                'type': 'ir.actions.act_window',
+                'res_model': "stock.invoice.onshipping",
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                }
 
     def action_descriptive_link(self):
         return self.sale_id.descriptive_link()

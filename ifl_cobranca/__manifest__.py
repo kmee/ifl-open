@@ -22,7 +22,7 @@
         'views/stock_picking_views.xml',
         'views/account_invoice.xml',
         'views/stock_move_views.xml',
-        # 'wizard/sale_make_invoice_advance_views.xml',
+        'wizard/sale_make_invoice_advance_views.xml',
     ],
     'demo': [
     ],
