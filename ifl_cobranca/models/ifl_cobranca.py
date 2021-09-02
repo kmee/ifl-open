@@ -5,6 +5,8 @@ from odoo import api, fields, models, _
 from urllib.parse import quote
 import decimal
 
+from odoo.exceptions import ValidationError
+
 
 class SaleOrder(models.Model):
 
@@ -292,6 +294,11 @@ class SaleOrder(models.Model):
         # fix 1 cent divergence
         if last_line and amount_freight != self.amount_freight_value:
             last_line.freight_value += amount_freight - self.amount_freight_value
+
+    def action_confirm(self):
+        if not self.carrier_id:
+            raise ValidationError("Você não pode confirmar uma Ordem de Venda sem antes escolher um método de entrega.")
+        return super(SaleOrder, self).action_confirm()
 
 
 class Picking(models.Model):
