@@ -109,8 +109,8 @@ class SaleOrder(models.Model):
             order_total += line.qty_done * line.product_id.standard_price
         # DONATION
         donation_price = self.get_donation_price()
-        final_order_message += '- Contribuição IFL (35): R$ %.2f\n' % \
-            donation_price
+        final_order_message += '- Contribuição IFL (35%): '
+        final_order_message += 'R$ %.2f\n' % donation_price
         order_total += donation_price
         # FREIGHT
         final_order_message += '- Frete: R$ %.2f\n' % \
