@@ -9,7 +9,7 @@
         <field eval="55" name="priority"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='button_scrap']" position="after">
-                <button name="action_descriptive_link" string="Whatsapp" class="oe_highlight" type="object"/>
+                <button name="action_descriptive_link" string="Whatsapp" class="oe_highlight" type="object" attrs="{'invisible': [('state', '=', 'done')]}"/>
             </xpath>
         </field>
     </record>
