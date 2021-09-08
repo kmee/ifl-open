@@ -5,24 +5,11 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <notebook position="inside">
-                <page name="whatsapp_page" string="Whatsapp">
-                    <separator string='Links'/>
-                    <button name="descriptive_link" type="object" string="Ir para conversa descritiva" class="oe_highlight"/>
-                    <hr/>
-                    <button name="simple_link" type="object" string="Ir para conversa simples" class="oe_highlight"/>
-                    <hr/>
-<!--                    <button name="update_order" type="object" string="Atualizar venda" class="oe_highlight"/>-->
-<!--                    <hr/>-->
-                    <button name="enable_payment_token" type="object" string="Desbloquear token do cartão" class="oe_highlight"/>
-                    <hr/>
-                    <button name="update_donation" type="object" string="Atualizar doação" class="oe_highlight"/>
-                </page>
-            </notebook>
 
             <xpath expr="//field[@name='partner_shipping_id']" position="after">
                 <field name="donation_price"/>
             </xpath>
+
         </field>
     </record>
 </odoo>
