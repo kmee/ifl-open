@@ -50,6 +50,7 @@
         'views/website_sale_portal.xml',
         'templates/cart_total.xml',
         # 'templates/delivery_mathods.xml',
+        'templates/cart_fix_qty_table.xml',
         ],
 
     # Odoo Store Specific
