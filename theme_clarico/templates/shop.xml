@@ -316,11 +316,11 @@
                t-value="request.env['product.rule'].sudo().search([('active','=',True)])"/>
             <t t-if="is_popularity">
                 <t t-set="website_sale_sortable"
-                   t-value="[('New Arrivals', 'create_date desc'),('Popular', 'score desc'),(list_price_desc_label,'list_price desc'),(list_price_asc_label,'list_price asc'),(name_asc_label,'name asc'),(name_desc_label,'name desc')]"/>
+                   t-value="[('Novos Produtos', 'create_date desc'),('Popular', 'score desc'),(list_price_desc_label,'list_price desc'),(list_price_asc_label,'list_price asc'),(name_asc_label,'name asc'),(name_desc_label,'name desc')]"/>
             </t>
             <t t-else="">
                 <t t-set="website_sale_sortable"
-                   t-value="[('New Arrivals', 'create_date desc'),(list_price_desc_label,'list_price desc'),(list_price_asc_label,'list_price asc'),(name_asc_label,'name asc'),(name_desc_label,'name desc')]"/>
+                   t-value="[('Novos Produtos', 'create_date desc'),(list_price_desc_label,'list_price desc'),(list_price_asc_label,'list_price asc'),(name_asc_label,'name asc'),(name_desc_label,'name desc')]"/>
             </t>
         </xpath>
     </template>
