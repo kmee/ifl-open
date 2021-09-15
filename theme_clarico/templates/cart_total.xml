@@ -12,7 +12,7 @@
                         o custo dos produtores e
                         a
                         contribuição de 35% para o Instituto Feira Livre
-                        (aproximadamente R$ <span t-esc='"%.2f" % float(sub_total * 0.35)'/>).</p>
+                        (aproximadamente R$ <span t-esc='"%.2f" % float(sub_total / 1.35 * 0.35)'/>).</p>
                 </td>
             </tr>
         </xpath>
