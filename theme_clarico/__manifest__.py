@@ -51,6 +51,7 @@
         'templates/cart_total.xml',
         # 'templates/delivery_mathods.xml',
         'templates/cart_fix_qty_table.xml',
+        'templates/auth_signup_login_templates.xml',
         ],
 
     # Odoo Store Specific

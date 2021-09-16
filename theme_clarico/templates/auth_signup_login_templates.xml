@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="signup_inherit" inherit_id="auth_signup.signup" name="Sign up login">
+        <xpath expr="//form[hasclass('oe_signup_form')]" position="before">
+            <div class="oe_signup_form">
+                <div class="text-center pt-3">
+                    <h2>Já tem cadastro?</h2>
+                </div>
+                <div class="text-center oe_login_buttons pt-3">
+                    <a t-attf-href="/web/login?{{ keep_query() }}" class="btn btn-primary btn-block" role="button">
+                        Clique aqui
+                    </a>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
