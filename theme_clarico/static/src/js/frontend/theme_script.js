@@ -558,11 +558,14 @@ function quickview(){
                 var $default_price = $parent.find(".oe_default_price .oe_currency_value");
                 var $optional_price = $parent.find(".oe_optional .oe_currency_value");
                 var $qty = document.querySelector('.secondary-quantity');
+                if (!$qty) {
+                    $qty = document.querySelector('.quantity');
+                }
                 var $subtotal_price = $parent.find(".oe_price .oe_currency_value")[1];
                 var $uom_select = document.querySelector('#secondary_uom');
                 var uom_factor = '1,0';
                 if(($uom_select) && ($uom_select.selectedIndex) && ($uom_select.selectedIndex != -1)) {
-                    let uom_factor = $uom_select.options[$uom_select.selectedIndex].getAttribute('data-secondary-uom-factor');
+                    uom_factor = $uom_select.options[$uom_select.selectedIndex].getAttribute('data-secondary-uom-factor');
                 }
 
                 var self = this;
@@ -607,9 +610,15 @@ function quickview(){
             var $default_price = document.querySelector(".oe_default_price");
             var $optional_price = document.querySelector(".oe_optional");
             var $qty = document.querySelector('.secondary-quantity');
+            if (!$qty) {
+                $qty = document.querySelector('.quantity');
+            }
             var $subtotal_price = document.querySelector(".oe_price")[1];
             var $uom_select = document.querySelector('#secondary_uom');
-            var uom_factor = $uom_select.options[$uom_select.selectedIndex].getAttribute('data-secondary-uom-factor');
+            var uom_factor = '1,0';
+            if(($uom_select) && ($uom_select.selectedIndex) && ($uom_select.selectedIndex != -1)) {
+                uom_factor = $uom_select.options[$uom_select.selectedIndex].getAttribute('data-secondary-uom-factor');
+            }
 
             var self = this;
             if($('.oe_price .oe_currency_value')[1]) {
