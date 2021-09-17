@@ -3,7 +3,7 @@
     <template id="products_item" inherit_id="website_sale.products_item">
         <!-- Display "From" if variants have distinct extra prices -->
         <xpath expr="//span[text()='From ']" position="replace">
-            <t t-if="product.has_distinct_variant_price">
+            <t t-if="combination_info.get('has_distinct_price')">
                 <span>A partir de </span>
             </t>
         </xpath>
