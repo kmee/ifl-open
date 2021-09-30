@@ -53,6 +53,7 @@
         'templates/cart_fix_qty_table.xml',
         'templates/auth_signup_login_templates.xml',
         'views/address_management_inherit.xml',
+        'views/sale_order_product_replace.xml',
         ],
 
     # Odoo Store Specific
