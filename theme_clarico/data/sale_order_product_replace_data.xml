@@ -1,0 +1,18 @@
+<odoo>
+
+    <record id="product_replace_strategy_1" model="product.replace.strategy">
+        <field name="name">Substituir</field>
+        <field name="description">Você autoriza que façamos substituições, sem necessidade de contato (podem haver alterações no valor final da compra).</field>
+    </record>
+
+    <record id="product_replace_strategy_2" model="product.replace.strategy">
+        <field name="name">Excluir</field>
+        <field name="description">Nós excluímos do pedido o item faltante e estornamos o valor pago por ele.</field>
+    </record>
+
+    <record id="product_replace_strategy_3" model="product.replace.strategy">
+        <field name="name">Entrar em contato</field>
+        <field name="description">Nós entramos em contato com você, sugerindo substituições para que você aprove.</field>
+    </record>
+
+</odoo>

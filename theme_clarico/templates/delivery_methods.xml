@@ -1,0 +1,34 @@
+<odoo>
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="Shop">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/theme_clarico/static/src/js/frontend/website_sale_delivery.js"/>
+        </xpath>
+    </template>
+
+    <template id="inherit_delivery_methods_for_contribution" inherit_id="website_sale_delivery.payment_delivery">
+
+        <xpath expr="//div[@id='payment_method']" position="before">
+
+            <div class="mb24 mt8">
+                <h3>Preferência de Alteração na Compra</h3>
+            </div>
+            <div class="card border-0" id="preferred_method">
+                <ul class="list-group">
+
+                    <t t-foreach="replace_strategies" t-as="strategy">
+                        <li class="list-group-item">
+                            <t t-call="theme_clarico.payment_replace_strategy"/>
+                        </li>
+                    </t>
+                </ul>
+            </div>
+
+            <div class="mb24 mt8">
+                <h3>Contribuição Voluntária</h3>
+            </div>
+
+
+        </xpath>
+
+    </template>
+</odoo>

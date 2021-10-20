@@ -49,11 +49,15 @@
         'data/slider_styles_data.xml',
         'views/website_sale_portal.xml',
         'templates/cart_total.xml',
-        # 'templates/delivery_mathods.xml',
         'templates/cart_fix_qty_table.xml',
         'templates/auth_signup_login_templates.xml',
         'views/address_management_inherit.xml',
         'views/sale_order_product_replace.xml',
+        'security/product_replace_strategy.xml',
+        'data/sale_order_product_replace_data.xml',
+
+        'templates/payment_replace_strategy_template.xml',
+        'templates/delivery_methods.xml',
         ],
 
     # Odoo Store Specific

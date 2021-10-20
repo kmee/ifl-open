@@ -7,23 +7,24 @@
 
             <xpath expr="//field[@name='partner_shipping_id']" position="after">
                 <field name="product_replace"/>
+                <field name="product_replace_id"/>
             </xpath>
 
         </field>
     </record>
 
 
-    <record id="stock_picking_form_view_product_replace_inherit" model="ir.ui.view">
-        <field name="name">stock.picking.form.agreement</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock.view_picking_form"/>
-        <field name="arch" type="xml">
+<!--    <record id="stock_picking_form_view_product_replace_inherit" model="ir.ui.view">-->
+<!--        <field name="name">stock.picking.form.agreement</field>-->
+<!--        <field name="model">stock.picking</field>-->
+<!--        <field name="inherit_id" ref="stock.view_picking_form"/>-->
+<!--        <field name="arch" type="xml">-->
 
-            <xpath expr="//field[@name='fiscal_operation_id']" position="after">
-                <field name="product_replace"/>
-            </xpath>
-            
-        </field>
-    </record>
+<!--            <xpath expr="//field[@name='fiscal_operation_id']" position="after">-->
+<!--                <field name="product_replace"/>-->
+<!--            </xpath>-->
+<!--            -->
+<!--        </field>-->
+<!--    </record>-->
 
 </odoo>
