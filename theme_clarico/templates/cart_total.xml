@@ -8,11 +8,8 @@
                     style="padding-top: 0 !important; margin-top: 0 !important; padding-bottom: 0 !important; margin-bottom: 0 !important;"
                     colspan="2">
                     <t t-set="sub_total" t-value="website_sale_order.get_order_subtotal(website_sale_order.id)"/>
-                    <p style="font-size: 0.7rem !important;"> * Neste valor, estão inclusos
-                        o custo dos produtores e
-                        a
-                        contribuição de 35% para o Instituto Feira Livre
-                        (aproximadamente R$ <span t-esc='"%.2f" % float(sub_total / 1.35 * 0.35)'/>).</p>
+                    <p style="font-size: 0.7rem !important;" name="contribution_details"> * Neste valor, estão inclusos
+                        o custo dos produtores e a contribuição de <span name="contribution_percent">35</span>% para o Instituto Feira Livre (aproximadamente R$ <span name="contribution_price" t-esc='"%.2f" % float(sub_total / 1.35 * 0.35)'/>).</p>
                 </td>
             </tr>
         </xpath>

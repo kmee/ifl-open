@@ -32,10 +32,23 @@ odoo.define('theme_clarico.replace_strategy', function (require) {
     var _onContributionClick = function (ev) {
         var contribution_input = $(ev.currentTarget).val();
         if (contribution_input == -1) {
-            contribution_input = $("#custom_contribution input[name='contribution_int']").val();
+            if ($("#custom_contribution input[name='contribution_int']").val() == false) {
+                contribution_input = 0;
+            } else {
+                contribution_input = $("#custom_contribution input[name='contribution_int']").val();
+            }
         }
         var values = {'contribution': contribution_input}
         dp.add(ajax.jsonRpc('/shop/update_strategy', 'call', values));
+        // UPDATE FRONT END VALUES
+        var $contribution_price = $("span[name='contribution_price']");
+        var $contribution_percent = $("span[name='contribution_percent']");
+
+        $contribution_percent[0].innerText = contribution_input;
+        var $subtotal = $('#order_total_untaxed .oe_currency_value')
+        var subtotal = parseFloat($subtotal[0].innerText.replace(/\./g, '').replace(/,/g, '.'));
+        var real_price = Number((subtotal / 1.35).toFixed(2))
+        $contribution_price[0].innerText = real_price * contribution_input / 100;
     }
 
     var $contribution_input = $("#custom_contribution input[name='contribution_input']");
