@@ -97,6 +97,7 @@
                     <th class="border-top-0"></th>
                     <th class="border-top-0 td-qty">Quant.</th>
                     <th class="border-top-0 text-right td-price">Preço</th>
+                    <th class="border-top-0 text-right td-price" name="price_th_hidden">Preço</th>
                 </tr>
             </thead>
         </xpath>
@@ -110,6 +111,10 @@
             <td class="text-right td-price" name="price">
                 <t t-set="sub_total" t-value="line.get_subtotal_cart(line.id)"/>
                 <span t-esc="float(sub_total)" style="white-space: nowrap;" t-options="{&quot;widget&quot;: &quot;monetary&quot;,&quot;display_currency&quot;: website.get_current_pricelist().currency_id}" class="subtotal_show"/>
+            </td>
+            <td class="text-right td-price" name="price_hidden">
+                <t t-set="sub_total" t-value="line.get_subtotal_cart(line.id)"/>
+                <span t-esc='"%.2f" % float(sub_total / 1.35)' style="white-space: nowrap;" class="subtotal_show"/>
             </td>
         </xpath>
         <xpath expr="//strong[@t-field='line.name_short']" position="replace">
