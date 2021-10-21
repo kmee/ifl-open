@@ -6,7 +6,6 @@
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='partner_shipping_id']" position="after">
-                <field name="product_replace"/>
                 <field name="product_replace_id"/>
             </xpath>
 

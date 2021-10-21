@@ -22,9 +22,10 @@ odoo.define('theme_clarico.replace_strategy', function (require) {
     var _onStrategyObs = function (ev) {
         var strategy_obs_text = $(ev.currentTarget).val();
         var values = {'strategy_obs': strategy_obs_text}
+        dp.add(ajax.jsonRpc('/shop/update_strategy', 'call', values));
     }
 
-    var $strategy_obs_text = $("#preferred_method input[name='replace_obs_text']");
-    $strategy_obs_text.focusout(_onStrategyObs);
+    var $strategy_obs_text = $("#preferred_method_obs input[name='replace_obs_text']");
+    $strategy_obs_text.change(_onStrategyObs);
 
 });

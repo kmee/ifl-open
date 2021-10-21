@@ -12,15 +12,28 @@
             <div class="mb24 mt8">
                 <h3>Preferência de Alteração na Compra</h3>
             </div>
-            <div class="card border-0" id="preferred_method">
-                <ul class="list-group">
 
-                    <t t-foreach="replace_strategies" t-as="strategy">
-                        <li class="list-group-item">
-                            <t t-call="theme_clarico.payment_replace_strategy"/>
-                        </li>
-                    </t>
-                </ul>
+            <div class="card">
+                <div class="card-body border-0 pb8" id="preferred_method">
+                    <h5>Caso algum item esteja indisponível, o que você prefere?</h5>
+
+                    <ul class="list-group">
+
+                        <t t-foreach="replace_strategies" t-as="strategy">
+                            <li class="list-group-item border-0">
+                                <t t-call="theme_clarico.payment_replace_strategy"/>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+
+                <div class="card-footer" id="preferred_method_obs">
+                    <h6 class="text-muted">Gostaria de deixar alguma observação a quem for selecionar seu pedido?</h6>
+                    <input t-att-value="order.replace_obs_text" name="replace_obs_text" class="form-control"
+                           placeholder="Observação..."/>
+                    <label class="label-optional font-weight-bold" t-field="order.replace_obs_text"
+                           t-for="order.replace_obs_text"/>
+                </div>
             </div>
 
             <div class="mb24 mt8">

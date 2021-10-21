@@ -24,6 +24,7 @@ class SaleOrder(models.Model):
     product_replace_id = fields.Many2one(
         comodel_name='product.replace.strategy',
         string='Estratégia de Substituição',
+        default=lambda self: self.env.ref('theme_clarico.product_replace_strategy_1').id,
         required=True,
     )
 
@@ -35,4 +36,9 @@ class SaleOrder(models.Model):
     def _strategy_update(self, id):
         self.write({
             'product_replace_id': id,
+        })
+
+    def _strategy_obs_update(self, obs="obs"):
+        self.write({
+            'replace_obs_text': obs,
         })

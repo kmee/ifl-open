@@ -4,11 +4,12 @@
         <input t-att-value="strategy.id" t-att-id="'strategy_%i' % strategy.id" type="radio" name="strategy_type"
                t-att-checked="order.product_replace_id and order.product_replace_id.id == strategy.id and 'checked' or False"/>
 
-        <label class="label-optional" t-field="strategy.name" t-att-for="'strategy_%i' % strategy.id"/>
+        <label class="label-optional font-weight-bold" t-field="strategy.name" t-att-for="'strategy_%i' % strategy.id"/>
 
-<!--        <t t-if="delivery.website_description">-->
-<!--            <div t-field="delivery.website_description" class="text-muted mt8"/>-->
-<!--        </t>-->
+        <t t-if="strategy.description">
+            <br/>
+            <span t-field="strategy.description" class="text-muted mt8"/>
+        </t>
     </template>
 
 </odoo>
