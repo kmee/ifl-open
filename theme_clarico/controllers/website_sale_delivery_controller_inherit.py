@@ -23,3 +23,5 @@ class WebsiteSaleDeliveryInherit(WebsiteSaleDelivery):
             order = request.website.sale_get_order()
             if order:
                 order._strategy_obs_update(post['strategy_obs'])
+        if 'contribution' in post and post['contribution']:
+            print(post['contribution'])
