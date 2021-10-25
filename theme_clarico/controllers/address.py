@@ -44,7 +44,7 @@ class CieloPreProcessPayment(CieloController):
             'product_id': donation_product_id.id,
             'product_uom_qty': order.amount_price_gross,
             # 'price_total': order.amount_gross * 0.35,
-            'price_unit': 0.35,
+            'price_unit': order.donation_percentage/100,
             'order_id': order.id,
             'fiscal_operation_line_id': operation_line.id,
             'uot_id': uot_id.id
