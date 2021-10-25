@@ -7,6 +7,7 @@
 
             <xpath expr="//field[@name='partner_shipping_id']" position="after">
                 <field name="product_replace_id"/>
+                <field name="donation_percentage"/>
             </xpath>
 
         </field>

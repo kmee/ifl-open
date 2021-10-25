@@ -33,6 +33,11 @@ class SaleOrder(models.Model):
         required=False,
     )
 
+    donation_percentage = fields.Float(
+        string="Percentual de Contribuição",
+        required=False,
+    )
+
     def _strategy_update(self, id):
         self.write({
             'product_replace_id': id,
@@ -41,4 +46,9 @@ class SaleOrder(models.Model):
     def _strategy_obs_update(self, obs="obs"):
         self.write({
             'replace_obs_text': obs,
+        })
+
+    def _donation_percentage_update(self, percentage):
+        self.write({
+            'donation_percentage': percentage,
         })
