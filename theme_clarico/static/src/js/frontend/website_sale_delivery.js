@@ -44,15 +44,38 @@ odoo.define('theme_clarico.replace_strategy', function (require) {
         var $contribution_percent = $("span[name='contribution_percent']");
         $contribution_percent[0].innerText = contribution_input;
 
+        var _formatToMonetary = function (value) {
+            return(value.toFixed(2).toString().replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+        }
+
         // calc contribution
-        var $subtotal = $('#order_total_untaxed_hidden .sub_total_hidden')
-        var subtotal_real = parseFloat($subtotal[0].innerText);
+        var $subtotal_no_contribution = $('#order_total_untaxed_hidden .sub_total_hidden');
+        var subtotal_no_contribution = parseFloat($subtotal_no_contribution[0].innerText);
         var $contribution_price = $("span[name='contribution_price']");
-        $contribution_price[0].innerText = subtotal_real * contribution_input / 100;
+        $contribution_price[0].innerText = subtotal_no_contribution * contribution_input / 100;
+
+        //calc subtotal com contribuicao
+        var $subtotal_with_contribution = $('#order_total_untaxed .oe_currency_value');
+        var subtotal_with_contribution = (subtotal_no_contribution * (1 + (contribution_input/100)));
+        $subtotal_with_contribution[0].innerText = _formatToMonetary(subtotal_with_contribution);
 
         //calc product price for each prod
-        //calc subtotal
+        var $product_with_contribution = $('#cart_products .subtotal_show');
+        var $product_no_contribution = $('#cart_products .subtotal_hidden');
+        var product_with_contribution;
+        var product_no_contribution;
+        for (var pos = 0; pos < $product_with_contribution.length; pos++) {
+            product_no_contribution = parseFloat($product_no_contribution[pos].innerText);
+            product_with_contribution = (product_no_contribution * (1 + (contribution_input/100)));
+            $product_with_contribution[pos].innerText = _formatToMonetary(product_with_contribution);
+        }
+
         //calc total
+        var $delivery = $('#order_delivery .oe_currency_value');
+        var $total = $('#order_total .oe_currency_value');
+        var delivery = parseFloat($delivery[0].innerText);
+        $total[0].innerText = _formatToMonetary(subtotal_with_contribution + delivery);
+
     }
 
     var $contribution_input = $("#custom_contribution input[name='contribution_input']");

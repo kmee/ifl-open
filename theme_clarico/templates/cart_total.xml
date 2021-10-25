@@ -3,7 +3,7 @@
     <!--====================== Cart total ======================-->
     <template id="cart_total" inherit_id="website_sale.total">
         <xpath expr="//tr[@id='order_total_untaxed']" position="before">
-            <tr id="order_total_untaxed_hidden">
+            <tr class="o_hidden" id="order_total_untaxed_hidden">
                 <td class="text-right noborder">Subtotal:</td>
                 <td class="text-xl-right noborder">
                     <t t-set="sub_total_hidden" t-value="website_sale_order.get_order_subtotal(website_sale_order.id)"/>
