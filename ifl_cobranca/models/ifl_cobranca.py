@@ -4,8 +4,11 @@
 from odoo import api, fields, models, _
 from urllib.parse import quote
 import decimal
+import logging
 
 from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class SaleOrder(models.Model):
@@ -108,8 +111,9 @@ class SaleOrder(models.Model):
             final_order_message += msg_line
             order_total += line.qty_done * line.product_id.standard_price
         # DONATION
-        donation_price = self.get_donation_price()
-        final_order_message += '- Contribuição IFL (35%): '
+        percentage = self.donation_percentage
+        donation_price = self.get_donation_price(percentage/100)
+        final_order_message += '- Contribuição IFL (%.2f' % percentage + '%): '
         final_order_message += 'R$ %.2f\n' % donation_price
         order_total += donation_price
         # FREIGHT
@@ -249,12 +253,12 @@ class SaleOrder(models.Model):
             donation_line = order.order_line - valid_lines
             if donation_line:
                 donation_line.qty_delivered = order_subtotal
-                donation_line.price_unit = 0.35
+                donation_line.price_unit = order.donation_percentage/100
                 # TODO setar qty_delivery OU qty_delivered_manual
                 # donation_line.qty_delivered_manual =
                 #   order_subtotal * donation_line.price_unit
 
-    def get_donation_price(self):
+    def get_donation_price(self, percentage=.35):
         valid_lines = self.order_line.filtered(
             lambda l: l.product_id.default_code != 'DON')
         order_subtotal = sum(
@@ -262,7 +266,9 @@ class SaleOrder(models.Model):
             valid_lines)
         decimal.getcontext().rounding = decimal.ROUND_CEILING
         return float(
-            round(decimal.Decimal(str(order_subtotal * 0.35)), ndigits=2))
+            round(decimal.Decimal(str(order_subtotal * percentage)), ndigits=2))
+
+
 
     @api.multi
     def recompute_freight_distribution(self):
@@ -299,6 +305,16 @@ class SaleOrder(models.Model):
         if not self.carrier_id:
             raise ValidationError("Você não pode confirmar uma Ordem de Venda sem antes escolher um método de entrega.")
         return super(SaleOrder, self).action_confirm()
+
+    @api.multi
+    def payment_action_capture(self):
+        super(SaleOrder, self).payment_action_capture()
+        try:
+            self.authorized_transaction_ids._post_process_after_done()
+            self.env.cr.commit()
+        except Exception as e:
+            _logger.exception("Transaction post processing failed")
+            self.env.cr.rollback()
 
 
 class Picking(models.Model):
@@ -349,6 +365,7 @@ class Picking(models.Model):
 
     def replace_move(self):
         self._action_cancel()
+
 
 
 class SaleOrderLine(models.Model):
