@@ -36,6 +36,7 @@ class SaleOrder(models.Model):
     donation_percentage = fields.Float(
         string="Percentual de Contribuição",
         required=False,
+        default=35,
     )
 
     def _strategy_update(self, id):
