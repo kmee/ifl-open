@@ -31,7 +31,7 @@ class GooglemapsApiConfig(models.Model):
         if matrix and matrix.get('rows'):
             for row in matrix['rows']:
                 for element in row.get('elements'):
-                    if element.get('distance').get('value'):
+                    if 'distance' in element and element.get('distance').get('value'):
                         distances.append(element['distance']['value'])
         for distance in distances:
             if distance > result:
