@@ -24,6 +24,7 @@
         'views/stock_move_views.xml',
         'wizard/sale_make_invoice_advance_views.xml',
         'templates/product_attribute.xml',
+        'views/product_product_views.xml',
     ],
     'demo': [
     ],

@@ -1,0 +1,14 @@
+<odoo>
+
+    <record model="ir.ui.view" id="product_product_website_available">
+        <field name="name">product.product.website.tree</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="can_sell"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
