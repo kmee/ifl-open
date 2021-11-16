@@ -1,7 +1,10 @@
-import copy
+import logging
 
-from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+
+from odoo import api, models, _
+
+_logger = logging.getLogger(__name__)
 
 
 class AccountInvoice(models.Model):
@@ -16,4 +19,14 @@ class AccountInvoice(models.Model):
                 raise ValidationError(_('O produto %s não tem Referência Interna. Conserte-o antes de continuar.' % line.product_id.name))
 
         return super(AccountInvoice, self).action_invoice_open()
+
+    @api.multi
+    def payment_action_capture(self):
+        super(AccountInvoice, self).payment_action_capture()
+        try:
+            self.authorized_transaction_ids._post_process_after_done()
+            self.env.cr.commit()
+        except Exception as e:
+            _logger.exception("Transaction post processing failed")
+            self.env.cr.rollback()
 
