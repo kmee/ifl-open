@@ -6,6 +6,7 @@ class ProductProduct(models.Model):
 
     can_sell = fields.Boolean()
 
+
 class ProductTemplateAttributeValue(models.Model):
     """Inherit product template attribute value and make price extra
     computed"""

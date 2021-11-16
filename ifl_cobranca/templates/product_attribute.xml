@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="variants_can_sell" inherit_id="sale.variants">
+        <xpath expr="//li//div[hasclass('radio_input_value')]/.." position="attributes">
+            <attribute name="t-if">value_id.can_sell</attribute>
+        </xpath>
+    </template>
+
+</odoo>
