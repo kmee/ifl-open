@@ -261,6 +261,12 @@
         </xpath>
     </template>
     <template id="variants_ept" inherit_id="sale.variants">
+
+<!--        <xpath expr="//li//div[hassclass='radio_input_value']" position="inside">-->
+<!--&lt;!&ndash;            <attribute name="t-if">value_id.can_sell == True</attribute>&ndash;&gt;-->
+<!--            <span t-esc="value_id.can_sell"/>-->
+<!--        </xpath>-->
+
         <xpath expr="//label[hasclass('col-form-label')]" position="attributes">
             <attribute name="style"></attribute>
         </xpath>
