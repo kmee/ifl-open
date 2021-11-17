@@ -15,6 +15,7 @@
         <field name="name">Publicar no Website</field>
         <field name="type">ir.actions.server</field>
         <field name="model_id" ref="product.model_product_product"/>
+        <field name="binding_model_id" ref="product.model_product_product"/>
         <field name="state">code</field>
         <field name="code">
             if records:
@@ -26,6 +27,7 @@
         <field name="name">Remover do Website</field>
         <field name="type">ir.actions.server</field>
         <field name="model_id" ref="product.model_product_product"/>
+        <field name="binding_model_id" ref="product.model_product_product"/>
         <field name="state">code</field>
         <field name="code">
             if records:
