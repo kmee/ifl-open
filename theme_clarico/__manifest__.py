@@ -16,6 +16,8 @@
         'l10n_br_website_sale',
         ],
     'data': [
+        'security/ir.model.access.csv',
+        
         'templates/assets.xml',
         'templates/emipro_custom_snippets.xml',
         'templates/odoo_default_snippets.xml',
