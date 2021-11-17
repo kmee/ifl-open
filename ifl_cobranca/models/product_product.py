@@ -16,6 +16,15 @@ class ProductProduct(models.Model):
                 ('product_attribute_value_id', 'in', record.attribute_value_ids.ids),
             ])
             product_template_attribute_value_ids.write({'can_sell': enable})
+            
+            published_variants = self.env['product.template.attribute.value'].search([
+                ('product_tmpl_id', '=', tmpl_id.id),
+                ('can_sell', '=', True),
+            ])
+            if len(published_variants) == 0:
+                tmpl_id.is_published = False
+            else:
+                tmpl_id.is_published = True
 
 
 class ProductTemplateAttributeValue(models.Model):
