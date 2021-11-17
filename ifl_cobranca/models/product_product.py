@@ -7,6 +7,20 @@ class ProductProduct(models.Model):
     can_sell = fields.Boolean(string="Disponível no site?")
 
     @api.onchange('can_sell')
+    def _on_change_can_sell(self):
+        for record in self:
+            tmpl_id = record.product_tmpl_id
+            published_variants = self.env['product.product'].search([
+                ('product_tmpl_id', '=', tmpl_id.id),
+                ('can_sell', '=', True),
+            ])
+            if len(published_variants) == 0 and not record.can_sell:
+                tmpl_id.is_published = False
+            elif len(published_variants) == 1 and self._origin.can_sell and not record.can_sell:
+                tmpl_id.is_published = False
+            else:
+                tmpl_id.is_published = True
+
     def set_is_published(self):
         for record in self:
             tmpl_id = record.product_tmpl_id
