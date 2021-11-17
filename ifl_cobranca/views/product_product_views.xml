@@ -11,16 +11,17 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="product_product_website_available_form">
-        <field name="name">product.product.website.form</field>
-        <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_normal_form_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//page[@name='shop']//field[@name='inventory_availability']" position="before">
-                <field name="can_sell"/>
-            </xpath>
-        </field>
-    </record>
+<!--    This block adds the can_sell field to the product.product form view-->
+<!--    <record model="ir.ui.view" id="product_product_website_available_form">-->
+<!--        <field name="name">product.product.website.form</field>-->
+<!--        <field name="model">product.product</field>-->
+<!--        <field name="inherit_id" ref="product.product_normal_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//page[@name='shop']//field[@name='inventory_availability']" position="before">-->
+<!--                <field name="can_sell"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record id="action_product_product_website_publish" model="ir.actions.server">
         <field name="name">Publicar no Website</field>
@@ -45,5 +46,5 @@
                 records.scheduled_set_can_sell(enable=False)
         </field>
     </record>
-    
+
 </odoo>
