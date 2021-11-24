@@ -7,7 +7,7 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     legal_name = fields.Char(
-        compute="_compute_default_legal_name",
+        string="Razão Social",
         store=True,
     )
 
