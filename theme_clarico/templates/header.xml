@@ -1114,10 +1114,10 @@
                         <i class="fa fa-times te_srch_close"/>
                     </a>
                     <div class="te_searchform__body">
-                        <div class="te_text">Start typing and press Enter to search</div>
+                        <div class="te_text">Começe a digitar e pressione Enter para buscar</div>
                         <form class="te_searchform" action="/shop" method="get">
                             <input type="text" name="search" id="search" class="te_searchform__input"
-                                   placeholder="Search Entire Store..."/>
+                                   placeholder="Busque por Toda a Loja..."/>
                             <button type="submit" class="te_searchform__submit">
                                 <i class="fa fa-search "></i>
                             </button>
