@@ -101,13 +101,13 @@
         </xpath>
     </template>
 
-    <template id="theme_clarico_editor_compatibility" inherit_id="website.layout">
-        <xpath expr="//t[@t-set='head_website']" position="inside">
-            <script>
-                $(document).ready(function(){
-                    $("div[id='wrap']").removeClass("note-air-editor note-editable");
-                });
-            </script>
-        </xpath>
-    </template>
+<!--    <template id="theme_clarico_editor_compatibility" inherit_id="website.layout">-->
+<!--        <xpath expr="//t[@t-set='head_website']" position="inside">-->
+<!--            <script>-->
+<!--                $(document).ready(function(){-->
+<!--                    $("div[id='wrap']").removeClass("note-air-editor note-editable");-->
+<!--                });-->
+<!--            </script>-->
+<!--        </xpath>-->
+<!--    </template>-->
 </odoo>
