@@ -1,3 +1,5 @@
+from odoo.exceptions import ValidationError
+
 from odoo import api, fields, models, _
 
 
@@ -35,6 +37,8 @@ class ProductProduct(models.Model):
 
     def scheduled_set_can_sell(self, enable=True):
         for record in self:
+            if record.standard_price == 0 and enable:
+                raise ValidationError("O produto %s tem custo zero e não pode ser publicado." % record.name)
             tmpl_id = record.product_tmpl_id
             record.can_sell = enable
             
