@@ -26,7 +26,7 @@
                                 t-att-selected="'selected' if not product.sale_secondary_uom_id else None"
                                 t-att-data-secondary-uom-factor="1.0"
                                 t-att-data-product-uom-factor="1.0">
-                            <span t-esc="product.uom_id.sudo().name"/>
+                            <span t-esc="product.sudo().uom_id.name"/>
                         </option>
                         <t t-foreach="product.secondary_uom_ids" t-as="secondary_uom">
                             <option t-att-value="secondary_uom.id"
