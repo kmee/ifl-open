@@ -10,7 +10,7 @@ class AccountInvoiceLine(models.Model):
 
     @api.model
     def create(self, values):
-        dummy_doc = self.env.user.company_id.fiscal_dummy_id
+        dummy_doc = self.env.user.company_id._default_fiscal_dummy_id()
         invoice = self.env["account.invoice"].browse(values["invoice_id"])
         if invoice.purchase_id and invoice.purchase_id.imported_nfe_id:
             original_fiscal_doc_id = invoice.fiscal_document_id.id
