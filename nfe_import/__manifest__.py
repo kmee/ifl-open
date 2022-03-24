@@ -12,6 +12,7 @@
     'depends': [
         'l10n_br_purchase',
         'l10n_br_nfe',
+        'stock_picking_invoicing',
     ],
     'data': [
         'views/document.xml',
