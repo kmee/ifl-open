@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2022 KMEE (Renan Hiroki Bastos <renan.hiroki@kmee.com.br>)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="document_form_view">
+        <field name="name">l10n_br_fiscal.document.form (in nfe_import)</field>
+        <field name="model">l10n_br_fiscal.document</field>
+        <field name="inherit_id" ref="l10n_br_fiscal.document_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- Add PO Smart Button -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="purchase_id" invisible="1"/>
+                <button type="object" name="action_open_purchase" string="Ordem de Compra" class="oe_stat_button" icon="fa-folder-open" attrs="{'invisible':[('purchase_id','=',False)]}" options="{}"/>
+            </xpath>
+            
+            <!-- Add header buttons -->
+            <xpath expr="//header/button[@name='view_pdf']" position="before">
+                <field name="purchase_id" invisible="1"/>
+                <button name="action_open_link_nfe_po" type="object" string="Conciliar com Ordem de Compra" class="btn-primary" attrs="{'invisible':['|', ('imported_document','=',False), ('purchase_id', '!=', False)]}"/>
+            </xpath>
+            <xpath expr="//header/button[@name='view_xml']" position="after">
+                <button name="button_unlink_po_nfe" type="object" string="Desconciliar Ordem de Compra" attrs="{'invisible':[('purchase_id', '=', False)]}" confirm="Tem certeza que deseja desconciliar a Ordem de Compra?"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Imported Documents Tree -->
+    <record id="imported_document_tree" model="ir.ui.view">
+        <field name="name">l10n_br_fiscal.document.tree</field>
+        <field name="model">l10n_br_fiscal.document</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="company_id" groups="base.group_multi_company" />
+            <field name="document_type" />
+            <field name="document_serie" />
+            <field name="document_number" />
+            <field name="document_date" />
+            <field name="fiscal_operation_id" />
+            <field name="partner_id" />
+            <field name="amount_untaxed" />
+            <field name="amount_tax" />
+            <field name="amount_total" />
+            <field name="state" invisible="1" />
+            <field name="state_edoc" />
+            <field name="state_fiscal" />
+          </tree>
+        </field>
+    </record>
+
+    <!-- Imported Documents Action -->
+    <record id="imported_document_action" model="ir.actions.act_window">
+        <field name="name">Imported Document</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">l10n_br_fiscal.document</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="search_view_id" ref="l10n_br_fiscal.document_search" />
+        <field name="view_id" ref="imported_document_tree" />
+        <field name="domain">[('imported_document', '=', True)]</field>
+        <field name="context">{'default_fiscal_operation_type': 'in'}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new Document
+          </p><p>
+            Odoo helps you easily track all activities
+            related to a fiscal operation.
+          </p>
+        </field>
+    </record>
+
+    <!-- Imported Documents Menu-->
+    <menuitem
+        id="imported_document_menu"
+        action="imported_document_action"
+        name="Imported Document"
+        groups="l10n_br_fiscal.group_user,l10n_br_fiscal.group_manager"
+        parent="l10n_br_fiscal.document_sub_menu"
+        sequence="25"
+    />
+
+    <record id="action_document" model="ir.actions.act_window">
+        <field name="name">Documento Fiscal</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">l10n_br_fiscal.document</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>
