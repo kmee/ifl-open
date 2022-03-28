@@ -20,7 +20,7 @@
                 <button name="button_unlink_po_nfe" type="object" string="Desconciliar NFe" attrs="{'invisible':['|', ('imported_nfe_id', '=', []), ('invoice_ids', '!=', [])]}" confirm="Tem certeza que deseja desconciliar a NFe?"/>
             </xpath>
             <xpath expr="//header/button[@name='action_view_picking']" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', '|', '|' , ('is_shipped', '=', True), ('state','not in', ('purchase','done')), ('picking_count', '=', 0), ('entry_type', '=', False)]}</attribute>
+                <attribute name="attrs">{'invisible': ['|', '|', '|' , '&amp;', ('entry_type', '=', False), ('imported_nfe_id', '!=', []), ('is_shipped', '=', True), ('state','not in', ('purchase','done')), ('picking_count', '=', 0)]}</attribute>
             </xpath>
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button type="object" name="action_open_nfe" string="Fiscal Details" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible':[('imported_nfe_id','=',[])]}" options="{}"/>
