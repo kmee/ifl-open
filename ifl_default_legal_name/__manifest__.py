@@ -10,6 +10,7 @@
     'website': 'kmee.com.br',
     'depends': [
         'l10n_br_fiscal',
+        'l10n_br_account',
     ],
     'data': [
     ],
