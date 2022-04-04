@@ -7,6 +7,11 @@ from odoo import _, api, fields, models
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
+    boleto_number = fields.Char(
+        string='Número do Boleto',
+        required=False
+    )
+
     @api.model
     def create(self, values):
         purchase_id = values.get("purchase_id")

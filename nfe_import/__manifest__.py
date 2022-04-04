@@ -18,6 +18,7 @@
         'views/document.xml',
         'wizards/link_nfe_po_view.xml',
         'views/purchase_order_views.xml',
+        'views/account_invoice_view.xml',
     ],
     'demo': [
     ],
