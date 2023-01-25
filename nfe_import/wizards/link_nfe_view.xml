@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 KMEE (Renan Hiroki Bastos <renan.hiroki@kmee.com.br>)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+     <record id="link_nfe_form" model="ir.ui.view">
+        <field name="name">nfe_import.link_nfe.form</field>
+        <field name="model">nfe_import.link_nfe</field>
+        <field name="arch" type="xml">
+
+            <form string="Conciliamento">
+                <field name="origin_model" invisible="1"/>
+                <field name="partner_id" invisible="1"/>
+
+                <!-- Quando aberto a partir do fiscal_document -->
+                <div attrs="{'invisible': [('origin_model', '!=', 'document')]}">
+                    <!-- Escolher com qual tipo de documento conciliar -->
+                    <group string="Conciliar com">
+                        <field name="link_with"/>
+                        <field name="link_or_create" attrs="{'invisible': [('link_with', '=', False)]}"/>
+                    </group>
+
+                    <!-- Conciliamento com Picking através de documento -->
+                    <div attrs="{'invisible': ['|', ('link_with', '!=', 'other'), ('link_or_create', '=', False)]}">
+                        <group string="Conciliar com Outro">
+                            <field name="picking_id" attrs="{'invisible': [('link_or_create', '!=', 'link')]}" options="{'no_create': True}"/>
+                            <field name="picking_new_fiscal_operation_id" attrs="{'invisible': [('link_or_create', '!=', 'create')]}"/>
+                            <field name="new_scheduled_date" attrs="{'invisible': [('link_or_create', '!=', 'create')]}"/>
+                        </group>
+                        <separator
+                            string="Transferência"
+                            attrs="{'invisible': [('link_or_create', '!=', 'link')]}"
+                        />
+                        <group attrs="{'invisible': ['|', ('link_or_create', '!=', 'link'), ('picking_id', '=', False)]}">
+                            <group>
+                                <field name="picking_partner_id" readonly="True" />
+                            </group>
+                            <group>
+                                <field name="picking_date_created" readonly="True" />
+                                <field name="picking_fiscal_operation_id" readonly="True" />
+                            </group>
+                        </group>
+                        <group attrs="{'invisible': ['|', ('link_or_create', '!=', 'link'), ('picking_id', '=', False)]}">
+                            <field name="picking_move_ids_without_package" nolabel="1">
+                                <tree string="Views">
+                                    <field name="product_id"/>
+                                    <field name="invoice_state"/>
+                                    <field name="fiscal_operation_id"/>
+                                    <field name="fiscal_operation_line_id"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="quantity_done"/>
+                                    <field name="product_uom"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </div>
+                    <!-- Conciliamento com PO através de documento -->
+                    <div attrs="{'invisible': ['|', ('link_with', '!=', 'purchase'), ('link_or_create', '=', False)]}">
+                        <group string="Conciliar com Ordem de Compra">
+                            <field name="new_date_order" attrs="{'invisible': [('link_or_create', '!=', 'create')]}"/>
+                            <field name="new_date_planned" attrs="{'invisible': [('link_or_create', '!=', 'create')]}"/>
+                            <field name="purchase_id" attrs="{'invisible': [('link_or_create', '!=', 'link')]}" options="{'no_create': True}"/>
+                        </group>
+                        <separator
+                            string="Ordem de Compra"
+                            attrs="{'invisible': ['|', ('link_or_create', '!=', 'link'), ('purchase_id', '=', False)]}"
+                        />
+                        <group attrs="{'invisible': ['|', ('link_or_create', '!=', 'link'), ('purchase_id', '=', False)]}">
+                            <group>
+                                <field name="purchase_partner_id" readonly="True" />
+                                <field name="purchase_partner_ref" readonly="True" />
+                            </group>
+                            <group>
+                                <field name="purchase_date_order" readonly="True" />
+                                <field name="purchase_fiscal_operation_id" readonly="True" />
+                            </group>
+                        </group>
+                        <group attrs="{'invisible': ['|', ('link_or_create', '!=', 'link'), ('purchase_id', '=', False)]}">
+                            <field name="purchase_order_line" nolabel="1">
+                                <tree string="Views">
+                                    <field name="product_id"/>
+                                    <field name="date_planned"/>
+                                    <field name="product_qty"/>
+                                    <field name="qty_received"/>
+                                    <field name="qty_invoiced"/>
+                                    <field name="product_uom"/>
+                                    <field name="price_unit"/>
+                                    <field name="price_subtotal" widget="monetary"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </div>
+                </div>
+
+                <!-- Conciliamento com documento através de Picking de Industrialização -->
+                <div attrs="{'invisible': [('origin_model', '=', 'document')]}">
+                    <group string="Conciliar com Documento Fiscal">
+                        <field name="nfe_id" options="{'no_create': True}"/>
+                    </group>
+                    <separator
+                        string="Documento Fiscal"
+                    />
+                    <group>
+                        <group>
+                            <field name="nfe_partner_id" readonly="True" />
+                            <field name="nfe_document_date" readonly="True" />
+                        </group>
+                        <group>
+                            <field name="nfe_document_type" readonly="True" />
+                            <field name="nfe_document_number" readonly="True" />
+                            <field name="nfe_document_key" string='Document Key' readonly="True" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="nfe_line_ids" nolabel="1">
+                            <tree string="Views">
+                                <field name="product_id"/>
+                                <field name="uom_id"/>
+                                <field name="price_unit"/>
+                                <field name="quantity"/>
+                                <field name="amount_total"/>
+                            </tree>
+                        </field>
+                    </group>
+                </div>
+
+                <footer>
+                    <button name="link_nfe" type="object" string="Confirmar" class="btn-primary" />
+                </footer>
+            </form>
+
+        </field>
+     </record>
+
+    <record id="act_link_nfe" model="ir.actions.act_window">
+        <field name="name">Link NFe</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nfe_import.link_nfe</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

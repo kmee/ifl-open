@@ -12,17 +12,40 @@
             
             <!-- Add PO Smart Button -->
             <xpath expr="//div[@name='button_box']" position="inside">
-                <field name="purchase_id" invisible="1"/>
-                <button type="object" name="action_open_purchase" string="Ordem de Compra" class="oe_stat_button" icon="fa-folder-open" attrs="{'invisible':[('purchase_id','=',False)]}" options="{}"/>
+                <field name="linked_purchase_ids" invisible="1"/>
+                <button type="object" name="action_open_purchase" class="oe_stat_button" icon="fa-folder-open" attrs="{'invisible':[('linked_purchase_ids','=',[])]}" options="{}" >
+                    <field name="linked_purchase_count" widget="statinfo" string="Ordens de Compra" />
+                </button>
             </xpath>
-            
+
+            <!-- Remove header buttons -->
+            <xpath expr="//header/button[@name='view_pdf']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state_edoc', '=', 'em_digitacao'), ('imported_document', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='view_xml']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', '|', ('state_edoc', '=', 'em_digitacao'), ('document_electronic', '=', False), ('imported_document', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_document_send']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state_edoc', 'not in', ('a_enviar', 'rejeitada')), ('imported_document', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_document_invalidate']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state_edoc', 'in', ('em_digitacao', 'autorizada', 'cancelada', 'denegada')), ('imported_document', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='xml_error_message']/.." position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('xml_error_message', '=', False), ('imported_document', '=', True)]}</attribute>
+            </xpath>
+
             <!-- Add header buttons -->
             <xpath expr="//header/button[@name='view_pdf']" position="before">
-                <field name="purchase_id" invisible="1"/>
-                <button name="action_open_link_nfe_po" type="object" string="Conciliar com Ordem de Compra" class="btn-primary" attrs="{'invisible':['|', ('imported_document','=',False), ('purchase_id', '!=', False)]}"/>
+                <field name="linked_purchase_ids" invisible="1"/>
+                <button name="action_open_link_nfe" type="object" string="Conciliar" class="btn-primary" attrs="{'invisible':[('imported_document','=',False)]}"/>
             </xpath>
             <xpath expr="//header/button[@name='view_xml']" position="after">
-                <button name="button_unlink_po_nfe" type="object" string="Desconciliar Ordem de Compra" attrs="{'invisible':[('purchase_id', '=', False)]}" confirm="Tem certeza que deseja desconciliar a Ordem de Compra?"/>
+                <button name="button_unlink_po_nfe" type="object" string="Desconciliar POs" attrs="{'invisible':[('linked_purchase_ids', '=', [])]}" confirm="Tem certeza que deseja desconciliar a Ordem de Compra?"/>
+            </xpath>
+
+            <xpath expr="//field[@name='document_serie']" position="after">
+                <field name="linked_purchase_ids" widget="many2many_tags" />
             </xpath>
 
         </field>
@@ -39,48 +62,26 @@
             <field name="document_serie" />
             <field name="document_number" />
             <field name="document_date" />
-            <field name="fiscal_operation_id" />
             <field name="partner_id" />
             <field name="amount_untaxed" />
             <field name="amount_tax" />
             <field name="amount_total" />
             <field name="state" invisible="1" />
             <field name="state_edoc" />
-            <field name="state_fiscal" />
           </tree>
         </field>
     </record>
 
-    <!-- Imported Documents Action -->
-    <record id="imported_document_action" model="ir.actions.act_window">
-        <field name="name">Imported Document</field>
-        <field name="type">ir.actions.act_window</field>
+    <record id="action_document_tree_all" model="ir.actions.act_window">
+        <field name="name">Documents</field>
         <field name="res_model">l10n_br_fiscal.document</field>
+        <field name="type">ir.actions.act_window</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,kanban,form</field>
-        <field name="search_view_id" ref="l10n_br_fiscal.document_search" />
         <field name="view_id" ref="imported_document_tree" />
-        <field name="domain">[('imported_document', '=', True)]</field>
-        <field name="context">{'default_fiscal_operation_type': 'in'}</field>
-        <field name="help" type="html">
-          <p class="o_view_nocontent_smiling_face">
-            Create a new Document
-          </p><p>
-            Odoo helps you easily track all activities
-            related to a fiscal operation.
-          </p>
-        </field>
+        <field name="domain"></field>
+        <field name="context">{}</field>
     </record>
-
-    <!-- Imported Documents Menu-->
-    <menuitem
-        id="imported_document_menu"
-        action="imported_document_action"
-        name="Imported Document"
-        groups="l10n_br_fiscal.group_user,l10n_br_fiscal.group_manager"
-        parent="l10n_br_fiscal.document_sub_menu"
-        sequence="25"
-    />
 
     <record id="action_document" model="ir.actions.act_window">
         <field name="name">Documento Fiscal</field>

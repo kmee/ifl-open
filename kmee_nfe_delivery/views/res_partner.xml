@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Akretion
+     Copyright 2018 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="res_partner_transporter_form_view">
+        <field name="name">res.partner in (kmee_nfe_delivery) </field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority" eval="90"/>
+        <field name="arch" type="xml">
+            <field name="company_type" position="after">
+                <br/>
+                <field name="is_transporter" readonly="0" class="oe_inline" nolabel="1"/>
+                <label for="is_transporter" string="É uma Transportadora?" class="oe_inline"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="kmee_contacts_view_res_partner_filter">
+        <field name="name">kmee_contacts.view_res_partner_filter</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='supplier']" position="after">
+                <filter string="Transportadoras" name="transporter" domain="[('is_transporter','=',True), ('parent_id', '=', False)]" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

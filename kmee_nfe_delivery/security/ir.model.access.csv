@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"kmee_delivery_volume_user","Dados dos Volumes","model_kmee_delivery_volumes","l10n_br_fiscal.group_user",1,1,1,1
+"kmee_delivery_volume_manager","Dados dos Volumes","model_kmee_delivery_volumes","l10n_br_fiscal.group_manager",1,1,1,1
+"kmee_delivery_lacre_user","Lacres","model_kmee_delivery_lacres","l10n_br_fiscal.group_user",1,1,1,1
+"kmee_delivery_lacre_manager","Lacres","model_kmee_delivery_lacres","l10n_br_fiscal.group_manager",1,1,1,1

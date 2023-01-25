@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2022 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="kmee_stock_picking_form_view">
+        <field name="name">stock.picking.form (in kmee_nfe_delivery)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[3]" position="after">
+                <field name="location_dest_id_usage" invisible="1"/>
+                <page string="Transportadora" name="extra" attrs="{'invisible': [('location_dest_id_usage', '!=', 'customer')]}">
+                    <group>
+                        <field name="modFrete"/>
+                        <field name="transporter_id"
+                               context="{'default_company_type': 'company', 'default_is_company': 1, 'default_customer':0, 'default_is_transporter': True}"
+                               domain="[('is_transporter', '=', True)]"
+                               options="{'no_quick_create': True}"
+                        />
+                        <field name="volume_ids">
+                            <tree>
+                                <field name="quantidade"/>
+                                <field name="especie"/>
+                                <field name="marca"/>
+                                <field name="numero_volume"/>
+                                <field name="peso_liquido"/>
+                                <field name="peso_bruto"/>
+                                <field name="lacres_ids"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <field name="sale_id" invisible="1" />
+                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total" attrs="{'invisible': [('sale_id', '=', False)]}">
+                        <field name="currency_id" invisible="1" />
+                        <field name="amount_price_gross" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                        <field name="amount_discount_value" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                        <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="amount_freight_value" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                        <field name="amount_insurance_value" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                        <field name="amount_other_value" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                        <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                        <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                            <label for="amount_total" />
+                        </div>
+                        <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//field[@name='move_ids_without_package']" position="after">
+                <field name="sale_id" invisible="1" />
+                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total" attrs="{'invisible': ['|', ('location_dest_id_usage', '!=', 'customer'), ('sale_id', '=', False)]}">
+                    <field name="currency_id" invisible="1" />
+                    <field name="amount_price_gross" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                    <field name="amount_discount_value" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                    <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_freight_value" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                    <field name="amount_insurance_value" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                    <field name="amount_other_value" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                    <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                        <label for="amount_total" />
+                    </div>
+                    <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                </group>
+            </xpath>
+            
+        </field>
+    </record>
+
+
+
+</odoo>
+

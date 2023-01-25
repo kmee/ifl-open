@@ -10,20 +10,17 @@
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//header/button[@name='action_view_picking']" position="before">
-                <button name="action_open_import_document" string="Importar Documento" type="object" class="btn-primary" attrs="{'invisible': ['|', ('state', '!=', 'purchase'), ('imported_nfe_id', '!=', [])]}" help="Imp-ortar um documento fiscal e concilia-lo com esta Ordem de Compra automaticamente."/>
-                <button name="action_open_link_po_nfe" string="Conciliar com NFe" type="object" class="btn-primary" attrs="{'invisible': ['|', ('state', '!=', 'purchase'), ('imported_nfe_id', '!=', [])]}" help="Escolher um documento fiscal existente para conciliar com esta Ordem de Compra."/>
-                <button name="action_open_choose_entry_type" string="Escolher Tipo de Entrada" type="object" class="btn-primary" attrs="{'invisible': ['|', '|', '|', '|', ('entry_type', '!=', False), ('state', '!=', 'purchase'), ('imported_nfe_id', '=', []), ('invoice_status', '!=', 'no')]}" help="Escolher método de recebimento dos produtos."/>
-                <field name="imported_nfe_id" invisible="1"/>
-                <field name="entry_type" invisible="1"/>
+                <field name="imported_nfe_ids" invisible="1"/>
+                <button name="action_open_import_document" string="Importar Documento" type="object" class="btn-primary" attrs="{'invisible': [('state', '!=', 'purchase')]}" help="Importar um documento fiscal e concilia-lo com esta Ordem de Compra automaticamente."/>
+                <button name="action_open_link_nfe" string="Conciliar com NFe" type="object" class="btn-primary" attrs="{'invisible': [('state', '!=', 'purchase')]}" help="Escolher um documento fiscal existente para conciliar com esta Ordem de Compra."/>
             </xpath>
             <xpath expr="//header/button[@name='button_cancel']" position="before">
-                <button name="button_unlink_po_nfe" type="object" string="Desconciliar NFe" attrs="{'invisible':['|', ('imported_nfe_id', '=', []), ('invoice_ids', '!=', [])]}" confirm="Tem certeza que deseja desconciliar a NFe?"/>
-            </xpath>
-            <xpath expr="//header/button[@name='action_view_picking']" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', '|', '|' , '&amp;', ('entry_type', '=', False), ('imported_nfe_id', '!=', []), ('is_shipped', '=', True), ('state','not in', ('purchase','done')), ('picking_count', '=', 0)]}</attribute>
+                <button name="button_unlink_nfe" type="object" string="Desconciliar NFe" attrs="{'invisible':['|', ('imported_nfe_ids', '=', []), ('invoice_ids', '!=', [])]}" confirm="Tem certeza que deseja desconciliar a NFe?"/>
             </xpath>
             <xpath expr="//div[@name='button_box']" position="inside">
-                <button type="object" name="action_open_nfe" string="Fiscal Details" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible':[('imported_nfe_id','=',[])]}" options="{}"/>
+                <button type="object" name="action_open_nfe" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible':[('imported_nfe_ids','=',[])]}" options="{}">
+                    <field name="imported_document_count" widget="statinfo" string="Notas Importadas"/>
+                </button>
             </xpath>
         </field>
     </record>
@@ -34,6 +31,17 @@
         <field name="res_model">purchase.order</field>
         <field name="view_type">form</field>
         <field name="view_mode">form</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="action_purchase_tree_all" model="ir.actions.act_window">
+        <field name="name">Purchases</field>
+        <field name="res_model">purchase.order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="purchase.purchase_order_tree" />
+        <field name="domain"></field>
         <field name="context">{}</field>
     </record>
 

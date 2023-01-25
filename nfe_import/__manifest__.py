@@ -12,13 +12,15 @@
     'depends': [
         'l10n_br_purchase',
         'l10n_br_nfe',
+        'l10n_br_stock_account',
         'stock_picking_invoicing',
+        'spec_driven_model',
     ],
     'data': [
         'views/document.xml',
-        'wizards/link_nfe_po_view.xml',
         'views/purchase_order_views.xml',
-        'views/account_invoice_view.xml',
+        'views/stock_picking_views.xml',
+        'wizards/link_nfe_view.xml'
     ],
     'demo': [
     ],
