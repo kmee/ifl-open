@@ -46,9 +46,11 @@ class NfeImport(models.TransientModel):
                 ),
                 "partner_uom": product_line.uom_internal.id,
             }
-            if product_supplierinfo:
+            if product_supplierinfo and product_supplierinfo.product_id == product_line.product_id:
                 product_supplierinfo.update(values)
             else:
+                if product_supplierinfo:
+                    product_supplierinfo.unlink()
                 values["name"] = edoc.partner_id.id
                 supplier_info = self.env["product.supplierinfo"].create(values)
                 supplier_info.product_id.write({"seller_ids": [(4, supplier_info.id)]})
@@ -57,6 +59,7 @@ class NfeImport(models.TransientModel):
         for document_line in edoc.line_ids:
             product_line = self.imported_products_ids.filtered(lambda l: l.product_id == document_line.product_id)[0]
             document_line.partner_product_name = product_line.product_name
+            document_line.partner_product_code = product_line.product_code
 
     @api.onchange("nfe_xml")
     def _onchange_partner_id(self):
@@ -121,10 +124,11 @@ class NfeImport(models.TransientModel):
             if not internal_product:
                 continue
             for xml_product in parsed_xml.infNFe.det:
-                if xml_product.prod.cProd == product_line.product_code:
+                if xml_product.prod.cProd == product_line.product_code and xml_product.prod.xProd == product_line.product_name:
                     product_line.choose_ncm(xml_product)
                     self._check_ncm(xml_product.prod, product_line.product_id)
                     xml_product.prod.xProd = internal_product.name
+                    xml_product.prod.cProd = internal_product.default_code
                     xml_product.prod.cEAN = internal_product.barcode
                     xml_product.prod.cEANTrib = internal_product.barcode
                     xml_product.prod.uCom = product_line.uom_internal.code
