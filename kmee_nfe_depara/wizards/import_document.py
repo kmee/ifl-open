@@ -5,6 +5,7 @@ import base64
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, MissingError
+from itertools import groupby
 
 
 class NfeImport(models.TransientModel):
@@ -57,6 +58,8 @@ class NfeImport(models.TransientModel):
 
     def _set_partner_product_name(self, edoc):
         for document_line in edoc.line_ids:
+            if not self.imported_products_ids.filtered(lambda l: l.product_id == document_line.product_id):
+                continue
             product_line = self.imported_products_ids.filtered(lambda l: l.product_id == document_line.product_id)[0]
             document_line.partner_product_name = product_line.product_name
             document_line.partner_product_code = product_line.product_code
@@ -124,7 +127,8 @@ class NfeImport(models.TransientModel):
             if not internal_product:
                 continue
             for xml_product in parsed_xml.infNFe.det:
-                if xml_product.prod.cProd == product_line.product_code and xml_product.prod.xProd == product_line.product_name:
+                if xml_product.nItem == str(product_line.nItem):
+                # if xml_product.prod.cProd == product_line.product_code and xml_product.prod.xProd == product_line.product_name:
                     product_line.choose_ncm(xml_product)
                     self._check_ncm(xml_product.prod, product_line.product_id)
                     xml_product.prod.xProd = internal_product.name
@@ -147,6 +151,8 @@ class NfeImport(models.TransientModel):
 
     def _check_nfe_xml_products(self, parsed_xml):
         product_ids = []
+        # parsed_xml.infNFe.det = self.enum_products_same_name(parsed_xml.infNFe.det)
+
         for product in parsed_xml.infNFe.det:
             vICMS = 0
             pICMS = 0
@@ -172,6 +178,7 @@ class NfeImport(models.TransientModel):
                 self.env["l10n_br_nfe.import_xml.products"]
                 .create(
                     {
+                        "nItem": product.nItem,
                         "product_name": product.prod.xProd,
                         "product_code": product.prod.cProd,
                         "ncm_xml": product.prod.NCM,
@@ -195,10 +202,23 @@ class NfeImport(models.TransientModel):
             )
         if product_ids:
             self.imported_products_ids = [(6, 0, product_ids)]
+        
+    def enum_products_same_name(self, prod_list):
+        for prod, group in groupby(sorted(prod_list, key=lambda x: x.prod.xProd), key=lambda x: x.prod.xProd):
+            counter = 0
+            for product in group:
+                if counter >= 1:
+                    product.prod.xProd = product.prod.xProd + " (" + str(counter) + ")"
+                    product.prod.cProd = product.prod.cProd + "(" + str(counter) + ")"
+                counter += 1
+
+        return prod_list
 
 
 class NfeImportProducts(models.TransientModel):
     _inherit = "l10n_br_nfe.import_xml.products"
+
+    nItem = fields.Integer('nItem')
 
     product_code = fields.Char(string="Código do Produto do Parceiro")
 

@@ -264,12 +264,17 @@ class LinkNFePO(models.TransientModel):
         new_purchase_lines = []
         for document_line in document.line_ids:
             product_uom = self.env['uom.uom'].browse(document_line.uom_id).id or document_line.product_id.uom_id,
+            product_descriptions = document_line.product_id.seller_ids.filtered(lambda n: n.name == document_line.partner_id)
+            if product_descriptions:
+                product_descriptions = product_descriptions[0]
+            else:
+                product_descriptions = False
+
             new_line_dict = {
                 'product_id': document_line.product_id.id,
                 'origin_nfe_id': document.id,
                 'origin_nfe_line_id': document_line.id,
-                'name': document_line.product_id.seller_ids.filtered(lambda n: n.name == document_line.partner_id)[
-                    0].product_name or document_line.product_id.name,
+                'name': document_line.product_id.name if not product_descriptions else product_descriptions,
                 'date_planned': self.new_date_planned or datetime.now(),
                 'product_qty': document_line.quantity,
                 'product_uom': product_uom[0].id,
