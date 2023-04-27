@@ -276,6 +276,9 @@ class SaleOrder(models.Model):
         parcial_freight_applied = 0
         last_line = 0
 
+        if not self.carrier_id:
+            return
+
         amount_freight = self.carrier_id.rate_shipment(self)['price']
 
         valid_lines = self.order_line.filtered(
