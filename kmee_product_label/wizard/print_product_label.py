@@ -48,11 +48,11 @@ class PrintProductLabel(models.TransientModel):
         res = self._complete_label_fields(res)
         return res
 
-    name = fields.Char(default="Print Product Labels")
+    name = fields.Char(default="Print Product Labels", string="Imprimir Etiquetas")
     message = fields.Char(readonly=True)
     output = fields.Selection(
         selection=[("pdf", "PDF")],
-        string="Print to",
+        string="Imprimir em",
         default="pdf",
     )
     label_ids = fields.One2many(
@@ -91,9 +91,7 @@ class PrintProductLabel(models.TransientModel):
     def _compute_is_template_report(self):
         for wizard in self:
             # flake8: noqa: E501
-            wizard.is_template_report = self.report_id == self.env.ref(
-                "kmee_product_label.action_report_product_label_from_template"
-            )
+            wizard.is_template_report = self.report_id
 
     def get_labels_to_print(self):
         self.ensure_one()

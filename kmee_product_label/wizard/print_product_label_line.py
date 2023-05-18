@@ -10,12 +10,12 @@ class PrintProductLabelLine(models.TransientModel):
     _name = "print.product.label.line"
     _description = 'Line with a Product Label Data'
 
-    selected = fields.Boolean(string='Print', default=True)
+    selected = fields.Boolean(string='Imprimir', default=True)
     wizard_id = fields.Many2one(comodel_name='print.product.label')
-    product_id = fields.Many2one(comodel_name='product.product', required=True)
-    barcode = fields.Char(compute='_compute_barcode')
+    product_id = fields.Many2one(comodel_name='product.product', string='Produto', required=True)
+    barcode = fields.Char(compute='_compute_barcode', string='Código de Barras')
     qty_initial = fields.Integer(string='Initial Qty', default=1)
-    qty = fields.Integer(string='Label Qty', default=1)
+    qty = fields.Integer(string='Quantidade', default=1)
     company_id = fields.Many2one(
         comodel_name='res.company',
         required=True,

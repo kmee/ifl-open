@@ -36,33 +36,23 @@
     </record>
 
     <record id="action_report_product_label_A4_57x35" model="ir.actions.report">
-        <field name="name">Product Labels Feira</field>
+        <field name="name">Impressão de Etiqueta Feira</field>
         <field name="model">print.product.label.line</field>
         <field name="report_type">qweb-pdf</field>
         <field name="paperformat_id" ref="paperformat_label_a4_blank"/>
         <field name="report_name">kmee_product_label.report_product_label_57x35_template</field>
         <field name="report_file">kmee_product_label.report_product_label_57x35_template</field>
-        <field name="print_report_name">'Product Labels Feira'</field>
+        <field name="print_report_name">'Impressão de Etiqueta Feira'</field>
     </record>
 
     <record id="action_report_product_label_50x38" model="ir.actions.report">
-        <field name="name">Product Labels Térmica</field>
+        <field name="name">Impressão de Etiqueta Térmica</field>
         <field name="model">print.product.label.line</field>
         <field name="report_type">qweb-pdf</field>
         <field name="paperformat_id" ref="paperformat_label_50x38"/>
         <field name="report_name">kmee_product_label.report_product_label_50x38_template</field>
         <field name="report_file">kmee_product_label.report_product_label_50x38_template</field>
-        <field name="print_report_name">'Product Labels Térmica'</field>
-    </record>
-
-    <record id="action_report_product_label_from_template" model="ir.actions.report">
-        <field name="name">Product Label from your own template</field>
-        <field name="model">print.product.label.line</field>
-        <field name="report_type">qweb-pdf</field>
-        <field name="paperformat_id" ref="kmee_product_label.paperformat_label_a4_blank"/>
-        <field name="report_name">kmee_product_label.report_product_label_from_template</field>
-        <field name="report_file">kmee_product_label.report_product_label_from_template</field>
-        <field name="print_report_name">'Product Labels Custom Design'</field>
+        <field name="print_report_name">'Impressão de Etiqueta Térmica'</field>
     </record>
 
 </odoo>
