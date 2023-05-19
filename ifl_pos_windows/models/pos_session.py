@@ -14,3 +14,4 @@ class PosSession(models.Model):
                         f"O pedido {order_id.display_name} não pode ser fechado pois"
                         " não contém linhas"
                     )
+        return super(PosSession, self).action_pos_session_validate()
