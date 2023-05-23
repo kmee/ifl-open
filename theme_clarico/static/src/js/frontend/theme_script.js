@@ -577,8 +577,8 @@ odoo.define('theme_emipro.theme_script', function (require) {
                 var description_contribution_price = self._priceToStr(combination.price / 1.35 * 0.35);
                 $('.oe_price .oe_currency_value')[1].innerText = complete_price;
                 if ($('.custom_cost_price')[0] && $('.custom_contribution_price')[0]) {
-                    $('.custom_cost_price')[0].innerText = 'Preço do produtor: R$ ' + description_complete_price + '/kg';
-                    $('.custom_contribution_price')[0].innerText = 'Contribuição (35%): R$ ' + description_contribution_price + '/kg';
+                    $('.custom_cost_price')[0].innerText = 'Preço do produtor: R$ ' + description_complete_price + '/' + combination.uom_name;
+                    $('.custom_contribution_price')[0].innerText = 'Contribuição (35%): R$ ' + description_contribution_price + '/' + combination.uom_name;
                 }
             }
 
@@ -624,8 +624,8 @@ odoo.define('theme_emipro.theme_script', function (require) {
                 var description_contribution_price = self._priceToStr(parseFloat(($price.innerHTML).replace(",", ".")) / 1.35 * 0.35);
                 $('.oe_price .oe_currency_value')[1].innerText = complete_price;
                 if ($('.custom_cost_price')[0] && $('.custom_contribution_price')[0]) {
-                    $('.custom_cost_price')[0].innerText = 'Preço do produtor: R$ ' + description_complete_price + '/kg';
-                    $('.custom_contribution_price')[0].innerText = 'Contribuição (35%): R$ ' + description_contribution_price + '/kg';
+                    $('.custom_cost_price')[0].innerText = 'Preço do produtor: R$ ' + description_complete_price + '/' + combination.uom_name;
+                    $('.custom_contribution_price')[0].innerText = 'Contribuição (35%): R$ ' + description_contribution_price + '/' + combination.uom_name;
                 }
             }
             return;
