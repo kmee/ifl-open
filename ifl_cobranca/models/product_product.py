@@ -22,6 +22,14 @@ class ProductProduct(models.Model):
                 tmpl_id.is_published = False
             else:
                 tmpl_id.is_published = True
+    
+    @api.constrains('donation')
+    def check_admin(self):
+        user_admin = self.env.ref('base.user_admin')
+        if (user_admin != self.env.user):
+            raise ValidationError(
+                            _("Somente o Administrador tem permissão para alterar o campo donation")
+                        )
 
     def set_is_published(self):
         for record in self:
