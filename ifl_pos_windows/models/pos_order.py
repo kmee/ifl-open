@@ -28,3 +28,7 @@ class PosOrder(models.Model):
             "\n9- Sem Ocorrência de transporte."
         ),
     )
+
+    transporter_id = fields.Many2one(
+        comodel_name="res.partner", string="Transportadora", required=False
+    )
