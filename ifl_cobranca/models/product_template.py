@@ -8,8 +8,9 @@ class ProductTemplate(models.Model):
 
     @api.constrains('donation')
     def check_admin(self):
-        user_admin = self.env.ref('base.user_admin')
-        if (user_admin != self.env.user):
-            raise ValidationError(
-                            _("Somente o Administrador tem permissão para alterar o campo donation")
-                        )
+        if (self.donation == True):
+            user_admin = self.env.ref('base.user_admin')
+            if (user_admin != self.env.user):
+                raise ValidationError(
+                                _("Somente o Administrador tem permissão para alterar o campo donation")
+                            )
