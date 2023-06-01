@@ -5,6 +5,8 @@
 
 from odoo import api, fields, models
 
+from odoo.addons.product.models.product_pricelist import Pricelist
+
 
 class PrintProductLabelLine(models.TransientModel):
     _name = "print.product.label.line"
@@ -26,6 +28,13 @@ class PrintProductLabelLine(models.TransientModel):
     def _compute_barcode(self):
         for label in self:
             label.barcode = label.product_id.barcode
+    
+    def get_list_prices(self, product_id):
+        """Retorna a lista de preços para os templates de rótulo"""
+        external_list_id = self.env.ref("product.list0")
+        search_price = Pricelist.price_get(external_list_id, product_id, 1)
+        final_price = search_price[1]
+        return "{:.2f}".format(final_price)
 
     def action_plus_qty(self):
         for record in self:
