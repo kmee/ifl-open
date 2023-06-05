@@ -8,6 +8,9 @@ class DocumentWorkflow(models.AbstractModel):
 
     def action_document_confirm(self):
         for record in self:
+            if record.partner_id:
+                record.partner_id.zip_search()
+
             pag_line = self.env["nfe.40.detpag"].search(
                 [("nfe40_detPag_pag_id", "=", record.id)]
             )
