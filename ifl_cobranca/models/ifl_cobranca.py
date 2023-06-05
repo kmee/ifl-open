@@ -305,6 +305,12 @@ class SaleOrder(models.Model):
             last_line.freight_value += amount_freight - self.amount_freight_value
 
     def action_confirm(self):
+        # Set ind_final to True when sale comes from website
+        website_team_id = self.env.ref("sales_team.salesteam_website_sales").id
+        if self.team_id and self.team_id.id == website_team_id:
+            if self.partner_id:
+                self.partner_id.ind_final = "1"
+
         if not self.carrier_id:
             raise ValidationError("Você não pode confirmar uma Ordem de Venda sem antes escolher um método de entrega.")
         return super(SaleOrder, self).action_confirm()
