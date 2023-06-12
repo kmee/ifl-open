@@ -6,3 +6,4 @@ from . import product_product
 from . import product_template
 from . import product_mixin
 from . import l10n_br_zip
+from . import sale_make_invoice_advance
