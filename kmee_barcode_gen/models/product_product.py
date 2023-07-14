@@ -9,6 +9,11 @@ import re
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
+    not_auto_gen_barcode_internal = fields.Boolean(
+        string="Não gera barcode interno",
+        copy=False,
+    )
+
     barcode_bkp = fields.Char(
         string="Barcode Bkp",
         compute="_compute_barcode_bkp",
@@ -52,3 +57,34 @@ class ProductProduct(models.Model):
                     " posição de digito milhar. Essas posições são reservadas para as"
                     " letras f, l, v, m, g!"
                 )
+
+    @api.constrains("not_auto_gen_barcode_internal")
+    def _constrain_not_auto_gen_barcode_internal(self):
+        for record in self:
+            if record.not_auto_gen_barcode_internal and record.uom_id != self.env.ref(
+                "uom.product_uom_kgm"
+            ):
+                raise ValidationError(
+                    "O checkbox 'Não gera barcode interno' não pode ser utilizado em"
+                    " produtos cuja Unidade de Medida não seja kg."
+                )
+
+    @api.onchange("default_code")
+    def _onchange_default_code_barcode(self):
+        for record in self:
+            if record.not_auto_gen_barcode_internal:
+                continue
+
+            if record.uom_id != self.env.ref("uom.product_uom_kgm"):
+                continue
+
+            record._constrain_default_code()
+            record.barcode = "2" + record.default_code
+
+    @api.onchange("not_auto_gen_barcode_internal")
+    def _onchange_not_auto_gen_barcode_internal(self):
+        self._onchange_default_code_barcode()
+
+    @api.onchange("uom_id")
+    def _onchange_uom_id_barcode(self):
+        self._onchange_default_code_barcode()
