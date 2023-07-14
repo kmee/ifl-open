@@ -79,7 +79,7 @@ class ProductProduct(models.Model):
                 continue
 
             record._constrain_default_code()
-            record.barcode = "2" + record.default_code
+            record.barcode = record.generate_ean13_internal_barcode()
 
     @api.onchange("not_auto_gen_barcode_internal")
     def _onchange_not_auto_gen_barcode_internal(self):
@@ -88,3 +88,36 @@ class ProductProduct(models.Model):
     @api.onchange("uom_id")
     def _onchange_uom_id_barcode(self):
         self._onchange_default_code_barcode()
+
+    def generate_ean13_internal_barcode(self):
+        if len(self.default_code) > 6:
+            raise ValidationError(
+                "Não é possível criar código de barras para produtos com referência"
+                " interna com mais de 6 caracteres"
+            )
+
+        ean = ""
+        base_ean = "2" + self.default_code.zfill(6) + "".zfill(5)
+
+        base_ean = base_ean.replace("f", "1")
+        base_ean = base_ean.replace("l", "2")
+        base_ean = base_ean.replace("v", "3")
+        base_ean = base_ean.replace("m", "4")
+        base_ean = base_ean.replace("g", "5")
+
+        oddsum = 0
+        evensum = 0
+        total = 0
+
+        code = base_ean[::-1]
+
+        for i in range(len(code)):
+            if i % 2 == 0:
+                oddsum += int(code[i])
+            else:
+                evensum += int(code[i])
+
+        total = oddsum * 3 + evensum
+
+        ean = base_ean + str((10 - total % 10) % 10)
+        return ean
