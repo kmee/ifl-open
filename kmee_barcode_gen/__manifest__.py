@@ -15,6 +15,9 @@
     ],
     "data": [
         "views/product_product.xml",
+        "report/report.xml",
+        "report/report_product_product_prix_txitens_text.xml",
+        "data/product_product.xml",
     ],
     "demo": [],
 }

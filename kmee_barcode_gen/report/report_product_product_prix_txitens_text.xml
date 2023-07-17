@@ -1,0 +1,8 @@
+<odoo>
+
+<template id="report_product_product_prix_txitens_text">
+<t t-foreach="docs" t-as="o"><t t-if="o.default_code and o.default_code.replace('f', '1').replace('l', '2').replace('v', '3').replace('m', '4').replace('g', '5').isnumeric()">
+<t>01</t><!-- departamento DD --><t>03</t><!-- tipo etiqueta TT --><t>0</t><!-- preço 1 ou unidade 0 Z --><t t-esc="str(1000000 + int(o.default_code.replace('f', '1').replace('l', '2').replace('v', '3').replace('m', '4').replace('g', '5')))[1:]"/><!-- código do produto CCCCCC --><t t-esc="str(1000000 + int(o.standard_price * 100))[1:]"/><!-- preço PPPPPP --><t>999</t><!-- validade VVV - 998 não usada - 999 input manual --><t t-esc="o.name" /></t></t>
+</template>
+
+</odoo>
