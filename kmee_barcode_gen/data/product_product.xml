@@ -8,7 +8,7 @@
             <xpath expr="//filter[@name='inactive']" position="before">
                 <separator />
                 <filter name="txitens" string="TXITENS"
-                    domain="[('uom_id.name', '=', 'kg')]" />
+                    domain="[('uom_id.code', '=', 'KILO')]" />
                 <separator />
             </xpath>
         </field>
