@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+
+    <record id='ifl_delivery_product_5' model='product.product'>
+        <field name='name'>Até 5km</field>
+        <field name='type'>service</field>
+        <field name='lst_price'>10</field>
+        <field name='standard_price'>10</field>
+        <field name='fiscal_type'>09</field>
+        <field name='categ_id' ref='delivery.product_category_deliveries'/>
+    </record>
+
+    <record id='ifl_delivery_product_10' model='product.product'>
+        <field name='name'>Até 10km</field>
+        <field name='type'>service</field>
+        <field name='lst_price'>15</field>
+        <field name='standard_price'>15</field>
+        <field name='fiscal_type'>09</field>
+        <field name='categ_id' ref='delivery.product_category_deliveries'/>
+    </record>
+
+    <record id='ifl_delivery_5' model='delivery.carrier'>
+        <field name='name'>Entregar no endereço de envio acima indicado - Até 5km</field>
+        <field name='website_description'>Entrega em até 3 dias úteis. Você receberá uma mensagem com a estimativa de entrega quando seu pedido for faturado.</field>
+        <field name='fixed_price'>10</field>
+        <field name='website_published'>1</field>
+        <field name='product_id' ref='ifl_delivery_product_5'/>
+    </record>
+
+    <record id='ifl_delivery_10' model='delivery.carrier'>
+        <field name='name'>Entregar no endereço de envio acima indicado - Até 10km</field>
+        <field name='website_description'>Entrega em até 3 dias úteis. Você receberá uma mensagem com a estimativa de entrega quando seu pedido for faturado.</field>
+        <field name='fixed_price'>15</field>
+        <field name='website_published'>1</field>
+        <field name='product_id' ref='ifl_delivery_product_10'/>
+    </record>
+
+    <record id='delivery.free_delivery_carrier' model='delivery.carrier'>
+        <field name='name'>Retirar pessoalmente no Instituto Feira Livre</field>
+        <field name='website_description'>Você receberá uma mensagem informando a data e horários de retirada quando seu pedido for faturado.</field>
+    </record>
+
+    <record id='ifl_delivery_distance_line_5' model='googlemaps.api.distance.lines'>
+        <field name='distance_limit'>5000</field>
+        <field name='googlemaps_api_id' ref='ifl_delivery_config_default'/>
+        <field name='delivery_method_id' ref='ifl_delivery_5'/>
+    </record>
+
+    <record id='ifl_delivery_distance_line_10' model='googlemaps.api.distance.lines'>
+        <field name='distance_limit'>10000</field>
+        <field name='googlemaps_api_id' ref='ifl_delivery_config_default'/>
+        <field name='delivery_method_id' ref='ifl_delivery_10'/>
+    </record>
+
+</odoo>
