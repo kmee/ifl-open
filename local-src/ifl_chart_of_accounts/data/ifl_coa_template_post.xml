@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ifl_coa_chart_template" model="account.chart.template">
+        <field name="property_account_receivable_id" ref="ifl_acc_templ_1_1_02_01_001"/>
+        <field name="property_account_payable_id" ref="ifl_acc_templ_2_1_01_05_001"/>
+        <field name="property_account_expense_categ_id" ref="ifl_acc_templ_3_5_01_15_004"/>
+        <field name="property_account_income_categ_id" ref="ifl_acc_templ_3_1_01_11_001"/>
+    </record>
+
+    <data noupdate="1">
+        <function model="account.chart.template" name="try_loading_for_current_company">
+            <value eval="[ref('ifl_chart_of_accounts.ifl_coa_chart_template')]"/>
+        </function>
+    </data>
+
+</odoo>

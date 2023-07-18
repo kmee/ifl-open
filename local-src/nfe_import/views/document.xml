@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2022 KMEE (Renan Hiroki Bastos <renan.hiroki@kmee.com.br>)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="document_form_view">
+        <field name="name">l10n_br_fiscal.document.form (in nfe_import)</field>
+        <field name="model">l10n_br_fiscal.document</field>
+        <field name="inherit_id" ref="l10n_br_fiscal.document_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- Add PO Smart Button -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="linked_purchase_ids" invisible="1"/>
+                <button type="object" name="action_open_purchase" class="oe_stat_button" icon="fa-folder-open" attrs="{'invisible':[('linked_purchase_ids','=',[])]}" options="{}" >
+                    <field name="linked_purchase_count" widget="statinfo" string="Ordens de Compra" />
+                </button>
+            </xpath>
+
+            <!-- Remove header buttons -->
+            <xpath expr="//header/button[@name='view_pdf']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state_edoc', '=', 'em_digitacao'), ('imported_document', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='view_xml']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', '|', ('state_edoc', '=', 'em_digitacao'), ('document_electronic', '=', False), ('imported_document', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_document_send']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state_edoc', 'not in', ('a_enviar', 'rejeitada')), ('imported_document', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_document_invalidate']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state_edoc', 'in', ('em_digitacao', 'autorizada', 'cancelada', 'denegada')), ('imported_document', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='xml_error_message']/.." position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('xml_error_message', '=', False), ('imported_document', '=', True)]}</attribute>
+            </xpath>
+
+            <!-- Add header buttons -->
+            <xpath expr="//header/button[@name='view_pdf']" position="before">
+                <field name="linked_purchase_ids" invisible="1"/>
+                <button name="action_open_link_nfe" type="object" string="Conciliar" class="btn-primary" attrs="{'invisible':[('imported_document','=',False)]}"/>
+            </xpath>
+            <xpath expr="//header/button[@name='view_xml']" position="after">
+                <button name="button_unlink_po_nfe" type="object" string="Desconciliar POs" attrs="{'invisible':[('linked_purchase_ids', '=', [])]}" confirm="Tem certeza que deseja desconciliar a Ordem de Compra?"/>
+            </xpath>
+
+            <xpath expr="//field[@name='document_serie']" position="after">
+                <field name="linked_purchase_ids" widget="many2many_tags" />
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Imported Documents Tree -->
+    <record id="imported_document_tree" model="ir.ui.view">
+        <field name="name">l10n_br_fiscal.document.tree</field>
+        <field name="model">l10n_br_fiscal.document</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="company_id" groups="base.group_multi_company" />
+            <field name="document_type" />
+            <field name="document_serie" />
+            <field name="document_number" />
+            <field name="document_date" />
+            <field name="partner_id" />
+            <field name="amount_untaxed" />
+            <field name="amount_tax" />
+            <field name="amount_total" />
+            <field name="state" invisible="1" />
+            <field name="state_edoc" />
+          </tree>
+        </field>
+    </record>
+
+    <record id="action_document_tree_all" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">l10n_br_fiscal.document</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="imported_document_tree" />
+        <field name="domain"></field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="action_document" model="ir.actions.act_window">
+        <field name="name">Documento Fiscal</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">l10n_br_fiscal.document</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="product_template_form_view">
+        <field name="name">product.template.form (in ifl_import_records)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="l10n_br_fiscal.product_template_form"/>
+        <field name="arch" type="xml">
+            <page name="fiscal" position="after">
+                <page name="remote" string="Remote">
+                    <group>
+                        <group>
+                            <field name="remote_record_id"/>
+                            <field name="last_update_at"/>
+                        </group>
+                        <group>
+                            <field name="fiscal_settings_imported"/>
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+</odoo>

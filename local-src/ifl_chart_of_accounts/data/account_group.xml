@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id='ifl_account_group_1' model='account.group'>
+        <field name='code_prefix'>1</field>
+        <field name='name'>ATIVO</field>
+    </record>
+    <record id='ifl_account_group_11' model='account.group'>
+        <field name='code_prefix'>1.1</field>
+        <field name='name'>ATIVO CIRCULANTE</field>
+        <field name='parent_id' ref='ifl_account_group_1'/>
+    </record>
+    <record id='ifl_account_group_111' model='account.group'>
+        <field name='code_prefix'>1.1.01</field>
+        <field name='name'>DISPONIBILIDADE</field>
+        <field name='parent_id' ref='ifl_account_group_11'/>
+    </record>
+    <record id='ifl_account_group_1111' model='account.group'>
+        <field name='code_prefix'>1.1.01.01</field>
+        <field name='name'>CAIXA</field>
+        <field name='parent_id' ref='ifl_account_group_111'/>
+    </record>
+    <record id='ifl_account_group_1112' model='account.group'>
+        <field name='code_prefix'>1.1.01.02</field>
+        <field name='name'>BANCOS CONTA MOVIMENTO-REC.LIVRES</field>
+        <field name='parent_id' ref='ifl_account_group_111'/>
+    </record>
+    <record id='ifl_account_group_1113' model='account.group'>
+        <field name='code_prefix'>1.1.01.03</field>
+        <field name='name'>BANCOS CONTA MOVIMENTO-REC TERCEIROS</field>
+        <field name='parent_id' ref='ifl_account_group_111'/>
+    </record>
+    <record id='ifl_account_group_1114' model='account.group'>
+        <field name='code_prefix'>1.1.01.04</field>
+        <field name='name'>BANCOS CONTA MOVIMENTO-REC C/ RESTRICOES</field>
+        <field name='parent_id' ref='ifl_account_group_111'/>
+    </record>
+    <record id='ifl_account_group_1115' model='account.group'>
+        <field name='code_prefix'>1.1.01.05</field>
+        <field name='name'>APLICACOES FINANCEIRAS-REC LIVRES</field>
+        <field name='parent_id' ref='ifl_account_group_111'/>
+    </record>
+    <record id='ifl_account_group_1116' model='account.group'>
+        <field name='code_prefix'>1.1.01.06</field>
+        <field name='name'>APLICACOES FINANCEIRAS-REC TERCEIROS</field>
+        <field name='parent_id' ref='ifl_account_group_111'/>
+    </record>
+    <record id='ifl_account_group_1117' model='account.group'>
+        <field name='code_prefix'>1.1.01.07</field>
+        <field name='name'>APLICACOES FINANCEIRAS-REC C/ RESTRICOES</field>
+        <field name='parent_id' ref='ifl_account_group_111'/>
+    </record>
+    <record id='ifl_account_group_112' model='account.group'>
+        <field name='code_prefix'>1.1.02</field>
+        <field name='name'>REALIZAVEIS A CURTO PRAZO</field>
+        <field name='parent_id' ref='ifl_account_group_11'/>
+    </record>
+    <record id='ifl_account_group_1121' model='account.group'>
+        <field name='code_prefix'>1.1.02.01</field>
+        <field name='name'>CONTAS A RECEBER</field>
+        <field name='parent_id' ref='ifl_account_group_112'/>
+    </record>
+    <record id='ifl_account_group_1122' model='account.group'>
+        <field name='code_prefix'>1.1.02.02</field>
+        <field name='name'>ADIANTAMENTOS</field>
+        <field name='parent_id' ref='ifl_account_group_112'/>
+    </record>
+    <record id='ifl_account_group_1123' model='account.group'>
+        <field name='code_prefix'>1.1.02.03</field>
+        <field name='name'>IMPOSTOS A COMPENSAR</field>
+        <field name='parent_id' ref='ifl_account_group_112'/>
+    </record>
+    <record id='ifl_account_group_1124' model='account.group'>
+        <field name='code_prefix'>1.1.02.04</field>
+        <field name='name'>ESTOQUES</field>
+        <field name='parent_id' ref='ifl_account_group_112'/>
+    </record>
+    <record id='ifl_account_group_11250' model='account.group'>
+        <field name='code_prefix'>1.1.02.50</field>
+        <field name='name'>DESPESAS ANTECIPADAS</field>
+        <field name='parent_id' ref='ifl_account_group_112'/>
+    </record>
+    <record id='ifl_account_group_12' model='account.group'>
+        <field name='code_prefix'>1.2</field>
+        <field name='name'>ATIVO NAO CIRCULANTE</field>
+        <field name='parent_id' ref='ifl_account_group_1'/>
+    </record>
+    <record id='ifl_account_group_121' model='account.group'>
+        <field name='code_prefix'>1.2.01</field>
+        <field name='name'>REALIZAVEL A LONGO PRAZO</field>
+        <field name='parent_id' ref='ifl_account_group_12'/>
+    </record>
+    <record id='ifl_account_group_1211' model='account.group'>
+        <field name='code_prefix'>1.2.01.01</field>
+        <field name='name'>CREDITOS A LONGO PRAZO</field>
+        <field name='parent_id' ref='ifl_account_group_121'/>
+    </record>
+    <record id='ifl_account_group_122' model='account.group'>
+        <field name='code_prefix'>1.2.02</field>
+        <field name='name'>INVESTIMENTOS</field>
+        <field name='parent_id' ref='ifl_account_group_12'/>
+    </record>
+    <record id='ifl_account_group_1221' model='account.group'>
+        <field name='code_prefix'>1.2.02.01</field>
+        <field name='name'>PARTICIPACOES SOCIETARIAS</field>
+        <field name='parent_id' ref='ifl_account_group_122'/>
+    </record>
+    <record id='ifl_account_group_1222' model='account.group'>
+        <field name='code_prefix'>1.2.02.02</field>
+        <field name='name'>INVESTIMENTOS PERMANENTES DIVERSOS</field>
+        <field name='parent_id' ref='ifl_account_group_122'/>
+    </record>
+    <record id='ifl_account_group_123' model='account.group'>
+        <field name='code_prefix'>1.2.03</field>
+        <field name='name'>ATIVO PERMANENTE</field>
+        <field name='parent_id' ref='ifl_account_group_12'/>
+    </record>
+    <record id='ifl_account_group_1231' model='account.group'>
+        <field name='code_prefix'>1.2.03.01</field>
+        <field name='name'>IMOBILIZADOS</field>
+        <field name='parent_id' ref='ifl_account_group_123'/>
+    </record>
+    <record id='ifl_account_group_1232' model='account.group'>
+        <field name='code_prefix'>1.2.03.02</field>
+        <field name='name'>DEPRECIACOES ACUMULADAS</field>
+        <field name='parent_id' ref='ifl_account_group_123'/>
+    </record>
+    <record id='ifl_account_group_1233' model='account.group'>
+        <field name='code_prefix'>1.2.03.03</field>
+        <field name='name'>INTANGIVEIS</field>
+        <field name='parent_id' ref='ifl_account_group_123'/>
+    </record>
+    <record id='ifl_account_group_1234' model='account.group'>
+        <field name='code_prefix'>1.2.03.04</field>
+        <field name='name'>DIFERIDO (SALDOS ATE 31/12/2008 - MP 449/08)</field>
+        <field name='parent_id' ref='ifl_account_group_123'/>
+    </record>
+    <record id='ifl_account_group_1235' model='account.group'>
+        <field name='code_prefix'>1.2.03.05</field>
+        <field name='name'>AMORTIZACOES ACUMULADAS</field>
+        <field name='parent_id' ref='ifl_account_group_123'/>
+    </record>
+    <record id='ifl_account_group_13' model='account.group'>
+        <field name='code_prefix'>1.3</field>
+        <field name='name'>CONTAS DE COMPENSAÇÃO</field>
+        <field name='parent_id' ref='ifl_account_group_1'/>
+    </record>
+    <record id='ifl_account_group_131' model='account.group'>
+        <field name='code_prefix'>1.3.01</field>
+        <field name='name'>CONTAS DE COMPENSAÇÃO</field>
+        <field name='parent_id' ref='ifl_account_group_13'/>
+    </record>
+    <record id='ifl_account_group_2' model='account.group'>
+        <field name='code_prefix'>2</field>
+        <field name='name'>PASSIVO</field>
+    </record>
+    <record id='ifl_account_group_21' model='account.group'>
+        <field name='code_prefix'>2.1</field>
+        <field name='name'>PASSIVO CIRCULANTE</field>
+        <field name='parent_id' ref='ifl_account_group_2'/>
+    </record>
+    <record id='ifl_account_group_211' model='account.group'>
+        <field name='code_prefix'>2.1.01</field>
+        <field name='name'>EXIGIVEIS A CURTO PRAZO</field>
+        <field name='parent_id' ref='ifl_account_group_21'/>
+    </record>
+    <record id='ifl_account_group_2111' model='account.group'>
+        <field name='code_prefix'>2.1.01.01</field>
+        <field name='name'>EMPRESTIMOS E FINANCIAMENTOS</field>
+        <field name='parent_id' ref='ifl_account_group_211'/>
+    </record>
+    <record id='ifl_account_group_2112' model='account.group'>
+        <field name='code_prefix'>2.1.01.02</field>
+        <field name='name'>OBRIGACOES TRABALHISTAS</field>
+        <field name='parent_id' ref='ifl_account_group_211'/>
+    </record>
+    <record id='ifl_account_group_2113' model='account.group'>
+        <field name='code_prefix'>2.1.01.03</field>
+        <field name='name'>ENCARGOS SOCIAIS E PREVIDENCIARIOS A RECOLHER</field>
+        <field name='parent_id' ref='ifl_account_group_211'/>
+    </record>
+    <record id='ifl_account_group_2114' model='account.group'>
+        <field name='code_prefix'>2.1.01.04</field>
+        <field name='name'>OBRIGACOES TRIBUTARIAS A RECOLHER</field>
+        <field name='parent_id' ref='ifl_account_group_211'/>
+    </record>
+    <record id='ifl_account_group_2115' model='account.group'>
+        <field name='code_prefix'>2.1.01.05</field>
+        <field name='name'>OUTRAS OBRIGACOES</field>
+        <field name='parent_id' ref='ifl_account_group_211'/>
+    </record>
+    <record id='ifl_account_group_2116' model='account.group'>
+        <field name='code_prefix'>2.1.01.06</field>
+        <field name='name'>ADIANTAMENTOS</field>
+        <field name='parent_id' ref='ifl_account_group_211'/>
+    </record>
+    <record id='ifl_account_group_212' model='account.group'>
+        <field name='code_prefix'>2.1.02</field>
+        <field name='name'>TERMOS DE PARCERIA / CONVENIOS / LEIS DE INCENTIVO</field>
+        <field name='parent_id' ref='ifl_account_group_21'/>
+    </record>
+    <record id='ifl_account_group_2121' model='account.group'>
+        <field name='code_prefix'>2.1.02.01</field>
+        <field name='name'>RECEBIMENTO DE RECURSOS</field>
+        <field name='parent_id' ref='ifl_account_group_212'/>
+    </record>
+    <record id='ifl_account_group_2122' model='account.group'>
+        <field name='code_prefix'>2.1.02.02</field>
+        <field name='name'>APLICACOES DE RECURSOS</field>
+        <field name='parent_id' ref='ifl_account_group_212'/>
+    </record>
+    <record id='ifl_account_group_22' model='account.group'>
+        <field name='code_prefix'>2.2</field>
+        <field name='name'>PASSIVO NAO CIRCULANTE</field>
+        <field name='parent_id' ref='ifl_account_group_2'/>
+    </record>
+    <record id='ifl_account_group_221' model='account.group'>
+        <field name='code_prefix'>2.2.01</field>
+        <field name='name'>RESULTADOS DE EXERCICIOS FUTUROS</field>
+        <field name='parent_id' ref='ifl_account_group_22'/>
+    </record>
+    <record id='ifl_account_group_2211' model='account.group'>
+        <field name='code_prefix'>2.2.01.01</field>
+        <field name='name'>RECEITAS DIFERIDAS</field>
+        <field name='parent_id' ref='ifl_account_group_221'/>
+    </record>
+    <record id='ifl_account_group_2212' model='account.group'>
+        <field name='code_prefix'>2.2.01.02</field>
+        <field name='name'>CUSTOS E DESPESAS CORRESPONDENTES AO R.E.F.</field>
+        <field name='parent_id' ref='ifl_account_group_221'/>
+    </record>
+    <record id='ifl_account_group_222' model='account.group'>
+        <field name='code_prefix'>2.2.02</field>
+        <field name='name'>EXIGIVEL A LONGO PRAZO</field>
+        <field name='parent_id' ref='ifl_account_group_22'/>
+    </record>
+    <record id='ifl_account_group_2221' model='account.group'>
+        <field name='code_prefix'>2.2.02.01</field>
+        <field name='name'>EMPREST E FINANC A LONGO PRAZO</field>
+        <field name='parent_id' ref='ifl_account_group_222'/>
+    </record>
+    <record id='ifl_account_group_2222' model='account.group'>
+        <field name='code_prefix'>2.2.02.02</field>
+        <field name='name'>CREDITOS DE COLIGADAS E CONTROLADAS A LONGO PRAZO</field>
+        <field name='parent_id' ref='ifl_account_group_222'/>
+    </record>
+    <record id='ifl_account_group_2223' model='account.group'>
+        <field name='code_prefix'>2.2.02.03</field>
+        <field name='name'>PASSIVOS CONTIGENTES A LONGO PRAZO</field>
+        <field name='parent_id' ref='ifl_account_group_222'/>
+    </record>
+    <record id='ifl_account_group_23' model='account.group'>
+        <field name='code_prefix'>2.3</field>
+        <field name='name'>PATRIMONIO LIQUIDO</field>
+        <field name='parent_id' ref='ifl_account_group_2'/>
+    </record>
+    <record id='ifl_account_group_231' model='account.group'>
+        <field name='code_prefix'>2.3.01</field>
+        <field name='name'>PATRIMONIO SOCIAL</field>
+        <field name='parent_id' ref='ifl_account_group_23'/>
+    </record>
+    <record id='ifl_account_group_2311' model='account.group'>
+        <field name='code_prefix'>2.3.01.01</field>
+        <field name='name'>FUNDOS PATRIMONIAIS</field>
+        <field name='parent_id' ref='ifl_account_group_231'/>
+    </record>
+    <record id='ifl_account_group_2312' model='account.group'>
+        <field name='code_prefix'>2.3.01.02</field>
+        <field name='name'>SUPERAVIT OU DEFICIT ACUMULADO</field>
+        <field name='parent_id' ref='ifl_account_group_231'/>
+    </record>
+    <record id='ifl_account_group_232' model='account.group'>
+        <field name='code_prefix'>2.3.02</field>
+        <field name='name'>PATRIMONIO LIQUIDO</field>
+        <field name='parent_id' ref='ifl_account_group_23'/>
+    </record>
+    <record id='ifl_account_group_2321' model='account.group'>
+        <field name='code_prefix'>2.3.02.01</field>
+        <field name='name'>CAPITAL SOCIAL</field>
+        <field name='parent_id' ref='ifl_account_group_232'/>
+    </record>
+    <record id='ifl_account_group_2322' model='account.group'>
+        <field name='code_prefix'>2.3.02.02</field>
+        <field name='name'>RESERVAS DE CAPITAL</field>
+        <field name='parent_id' ref='ifl_account_group_232'/>
+    </record>
+    <record id='ifl_account_group_2323' model='account.group'>
+        <field name='code_prefix'>2.3.02.03</field>
+        <field name='name'>AJUSTES DE AVALIACAO PATRIMONIAL</field>
+        <field name='parent_id' ref='ifl_account_group_232'/>
+    </record>
+    <record id='ifl_account_group_2324' model='account.group'>
+        <field name='code_prefix'>2.3.02.04</field>
+        <field name='name'>RESERVAS DE LUCROS</field>
+        <field name='parent_id' ref='ifl_account_group_232'/>
+    </record>
+    <record id='ifl_account_group_2325' model='account.group'>
+        <field name='code_prefix'>2.3.02.05</field>
+        <field name='name'>PREJUIZOS ACUMULADOS</field>
+        <field name='parent_id' ref='ifl_account_group_232'/>
+    </record>
+    <record id='ifl_account_group_2326' model='account.group'>
+        <field name='code_prefix'>2.3.02.06</field>
+        <field name='name'>RESULTADO DO EXERCICIO</field>
+        <field name='parent_id' ref='ifl_account_group_232'/>
+    </record>
+    <record id='ifl_account_group_24' model='account.group'>
+        <field name='code_prefix'>2.4</field>
+        <field name='name'>CONTAS DE COMPENSAÇÃO</field>
+        <field name='parent_id' ref='ifl_account_group_2'/>
+    </record>
+    <record id='ifl_account_group_241' model='account.group'>
+        <field name='code_prefix'>2.4.01</field>
+        <field name='name'>CONTAS DE COMPENSAÇÃO</field>
+        <field name='parent_id' ref='ifl_account_group_24'/>
+    </record>
+    <record id='ifl_account_group_3' model='account.group'>
+        <field name='code_prefix'>3</field>
+        <field name='name'>RESULTADO DO EXERCICIO</field>
+        <field name='parent_id' ref=''/>
+    </record>
+    <record id='ifl_account_group_31' model='account.group'>
+        <field name='code_prefix'>3.1</field>
+        <field name='name'>RECEITAS</field>
+        <field name='parent_id' ref='ifl_account_group_3'/>
+    </record>
+    <record id='ifl_account_group_311' model='account.group'>
+        <field name='code_prefix'>3.1.01</field>
+        <field name='name'>RECEITAS OPERACIONAIS - PROPRIAS</field>
+        <field name='parent_id' ref='ifl_account_group_31'/>
+    </record>
+    <record id='ifl_account_group_3111' model='account.group'>
+        <field name='code_prefix'>3.1.01.01</field>
+        <field name='name'>CUSTEIO</field>
+        <field name='parent_id' ref='ifl_account_group_311'/>
+    </record>
+    <record id='ifl_account_group_3112' model='account.group'>
+        <field name='code_prefix'>3.1.01.02</field>
+        <field name='name'>ASSOCIATIVAS</field>
+        <field name='parent_id' ref='ifl_account_group_311'/>
+    </record>
+    <record id='ifl_account_group_3119' model='account.group'>
+        <field name='code_prefix'>3.1.01.09</field>
+        <field name='name'>FESTAS E EVENTOS</field>
+        <field name='parent_id' ref='ifl_account_group_311'/>
+    </record>
+    <record id='ifl_account_group_31110' model='account.group'>
+        <field name='code_prefix'>3.1.01.10</field>
+        <field name='name'>SUBVENCOES</field>
+        <field name='parent_id' ref='ifl_account_group_311'/>
+    </record>
+    <record id='ifl_account_group_31111' model='account.group'>
+        <field name='code_prefix'>3.1.01.11</field>
+        <field name='name'>VENDAS DE BENS E SERVICOS</field>
+        <field name='parent_id' ref='ifl_account_group_311'/>
+    </record>
+    <record id='ifl_account_group_31120' model='account.group'>
+        <field name='code_prefix'>3.1.01.20</field>
+        <field name='name'>RECEITAS FINANCEIRAS</field>
+        <field name='parent_id' ref='ifl_account_group_311'/>
+    </record>
+    <record id='ifl_account_group_31125' model='account.group'>
+        <field name='code_prefix'>3.1.01.25</field>
+        <field name='name'>RECEITAS DIVERSAS</field>
+        <field name='parent_id' ref='ifl_account_group_311'/>
+    </record>
+    <record id='ifl_account_group_312' model='account.group'>
+        <field name='code_prefix'>3.1.02</field>
+        <field name='name'>TERMOS DE PARCERIA / CONVENIOS / LEIS DE INCENTIVO</field>
+        <field name='parent_id' ref='ifl_account_group_31'/>
+    </record>
+    <record id='ifl_account_group_3121' model='account.group'>
+        <field name='code_prefix'>3.1.02.01</field>
+        <field name='name'>RECEBIMENTO DE RECURSOS</field>
+        <field name='parent_id' ref='ifl_account_group_312'/>
+    </record>
+    <record id='ifl_account_group_313' model='account.group'>
+        <field name='code_prefix'>3.1.03</field>
+        <field name='name'>OBTENCAO DE RENUNCIA FISCAL E GRATUIDADDE</field>
+        <field name='parent_id' ref='ifl_account_group_31'/>
+    </record>
+    <record id='ifl_account_group_3131' model='account.group'>
+        <field name='code_prefix'>3.1.03.01</field>
+        <field name='name'>OBTENCAO DE RENUNCIA FISCAL E GRATUIDADDE</field>
+        <field name='parent_id' ref='ifl_account_group_313'/>
+    </record>
+    <record id='ifl_account_group_314' model='account.group'>
+        <field name='code_prefix'>3.1.04</field>
+        <field name='name'>IMPOSTOS INCIDENTES</field>
+        <field name='parent_id' ref='ifl_account_group_31'/>
+    </record>
+    <record id='ifl_account_group_3141' model='account.group'>
+        <field name='code_prefix'>3.1.04.01</field>
+        <field name='name'>IMPOSTOS INCIDENTES</field>
+        <field name='parent_id' ref='ifl_account_group_314'/>
+    </record>
+    <record id='ifl_account_group_315' model='account.group'>
+        <field name='code_prefix'>3.1.05</field>
+        <field name='name'>VENDAS CANCELADAS E DEVOLUCOES</field>
+        <field name='parent_id' ref='ifl_account_group_31'/>
+    </record>
+    <record id='ifl_account_group_3151' model='account.group'>
+        <field name='code_prefix'>3.1.05.01</field>
+        <field name='name'>VENDAS CANCELADAS E DEVOLUCOES</field>
+        <field name='parent_id' ref='ifl_account_group_315'/>
+    </record>
+    <record id='ifl_account_group_316' model='account.group'>
+        <field name='code_prefix'>3.1.06</field>
+        <field name='name'>ABATIMENTOS</field>
+        <field name='parent_id' ref='ifl_account_group_31'/>
+    </record>
+    <record id='ifl_account_group_3161' model='account.group'>
+        <field name='code_prefix'>3.1.06.01</field>
+        <field name='name'>ABATIMENTOS</field>
+        <field name='parent_id' ref='ifl_account_group_316'/>
+    </record>
+    <record id='ifl_account_group_317' model='account.group'>
+        <field name='code_prefix'>3.1.07</field>
+        <field name='name'>DIVERSAS</field>
+        <field name='parent_id' ref='ifl_account_group_31'/>
+    </record>
+    <record id='ifl_account_group_3171' model='account.group'>
+        <field name='code_prefix'>3.1.07.01</field>
+        <field name='name'>DIVERSAS</field>
+        <field name='parent_id' ref='ifl_account_group_317'/>
+    </record>
+    <record id='ifl_account_group_319' model='account.group'>
+        <field name='code_prefix'>3.1.09</field>
+        <field name='name'>OUTRAS RECEITAS</field>
+        <field name='parent_id' ref='ifl_account_group_31'/>
+    </record>
+    <record id='ifl_account_group_3191' model='account.group'>
+        <field name='code_prefix'>3.1.09.01</field>
+        <field name='name'>GANHOS NAO OPERACIONAIS</field>
+        <field name='parent_id' ref='ifl_account_group_319'/>
+    </record>
+    <record id='ifl_account_group_35' model='account.group'>
+        <field name='code_prefix'>3.5</field>
+        <field name='name'>CUSTOS E DESPESAS</field>
+        <field name='parent_id' ref='ifl_account_group_3'/>
+    </record>
+    <record id='ifl_account_group_351' model='account.group'>
+        <field name='code_prefix'>3.5.01</field>
+        <field name='name'>CUSTOS E DESPESAS OPERACIONAIS</field>
+        <field name='parent_id' ref='ifl_account_group_35'/>
+    </record>
+    <record id='ifl_account_group_3511' model='account.group'>
+        <field name='code_prefix'>3.5.01.01</field>
+        <field name='name'>DESPESAS COM PESSOAL</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_3512' model='account.group'>
+        <field name='code_prefix'>3.5.01.02</field>
+        <field name='name'>BENEFICIOS PESSOAL COM VINCULO</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_3513' model='account.group'>
+        <field name='code_prefix'>3.5.01.03</field>
+        <field name='name'>ENCARGOS SOCIAIS</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_3514' model='account.group'>
+        <field name='code_prefix'>3.5.01.04</field>
+        <field name='name'>SERVICOS TOMADOS DE TERCEIROS</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_3515' model='account.group'>
+        <field name='code_prefix'>3.5.01.05</field>
+        <field name='name'>VIAGENS</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_3516' model='account.group'>
+        <field name='code_prefix'>3.5.01.06</field>
+        <field name='name'>OCUPACAO</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_3517' model='account.group'>
+        <field name='code_prefix'>3.5.01.07</field>
+        <field name='name'>DESPESAS COM VEICULOS</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_3518' model='account.group'>
+        <field name='code_prefix'>3.5.01.08</field>
+        <field name='name'>DESPESAS ADMINISTRATIVAS</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_3519' model='account.group'>
+        <field name='code_prefix'>3.5.01.09</field>
+        <field name='name'>MARKETING / CAPTACAO REC / DESENV PARCERIAS</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_35110' model='account.group'>
+        <field name='code_prefix'>3.5.01.10</field>
+        <field name='name'>DESPESAS TRIBUTARIAS</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_35111' model='account.group'>
+        <field name='code_prefix'>3.5.01.11</field>
+        <field name='name'>DESPESAS FINANCEIRAS</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+    <record id='ifl_account_group_35115' model='account.group'>
+        <field name='code_prefix'>3.5.01.15</field>
+        <field name='name'>CUSTO DOS PRODUTOS/MERCADORIAS VENDIDAS</field>
+        <field name='parent_id' ref='ifl_account_group_351'/>
+    </record>
+
+</odoo>

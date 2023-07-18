@@ -1,0 +1,50 @@
+<odoo>
+
+    <record model="ir.ui.view" id="product_product_website_available">
+        <field name="name">product.product.website.tree</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="can_sell"/>
+            </field>
+        </field>
+    </record>
+
+<!--    This block adds the can_sell field to the product.product form view-->
+<!--    <record model="ir.ui.view" id="product_product_website_available_form">-->
+<!--        <field name="name">product.product.website.form</field>-->
+<!--        <field name="model">product.product</field>-->
+<!--        <field name="inherit_id" ref="product.product_normal_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//page[@name='shop']//field[@name='inventory_availability']" position="before">-->
+<!--                <field name="can_sell"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="action_product_product_website_publish" model="ir.actions.server">
+        <field name="name">Publicar no Website</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="product.model_product_product"/>
+        <field name="binding_model_id" ref="product.model_product_product"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                records.scheduled_set_can_sell()
+        </field>
+    </record>
+
+    <record id="action_product_product_website_unpublish" model="ir.actions.server">
+        <field name="name">Remover do Website</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="product.model_product_product"/>
+        <field name="binding_model_id" ref="product.model_product_product"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                records.scheduled_set_can_sell(enable=False)
+        </field>
+    </record>
+
+</odoo>

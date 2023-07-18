@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="invoice_form_button_activate_token" model="ir.ui.view">
+        <field name="name">customer.token.enable.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='preview_invoice']" position="after">
+                <button name="enable_card_token" string="Reabilitar Cartão" type="object" class="btn-primary"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

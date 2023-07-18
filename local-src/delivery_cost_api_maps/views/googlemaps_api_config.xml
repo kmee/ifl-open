@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="googlemaps_api_config_form_view">
+        <field name="name">googlemaps.api.config.form (in delivery_cost_api_maps)</field>
+        <field name="model">googlemaps.api.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type="object" name="button_teste" string="Testar"/>
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                        <field name="api_key"/>
+                        <field name="default_delivery_method_id"/>
+                    </group>
+                    <group string="Delivery Costs">
+                        <field nolabel="1" name="distance_line_ids" editable="bottom">
+                                <tree>
+                                    <field name="distance_limit"/>
+                                    <field name="delivery_method_id"/>
+                                </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="googlemaps_api_config_tree_view">
+        <field name="name">googlemaps.api.config.tree (in delivery_cost_api_maps)</field>
+        <field name="model">googlemaps.api.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="googlemaps_api_config_act_window">
+        <field name="name">Googlemaps Distance</field> <!-- TODO -->
+        <field name="res_model">googlemaps.api.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="googlemaps_api_config_menu">
+        <field name="name">Googlemaps Distances</field>
+        <field name="parent_id" ref="website_sale.menu_ecommerce_settings"/> <!-- TODO -->
+        <field name="action" ref="googlemaps_api_config_act_window"/>
+        <field name="sequence" eval="1"/> <!-- TODO -->
+    </record>
+
+</odoo>
