@@ -40,6 +40,12 @@
         <field name='website_description'>Você receberá uma mensagem informando a data e horários de retirada quando seu pedido for faturado.</field>
     </record>
 
+    <record id='ifl_delivery_config_default' model='googlemaps.api.config'>
+        <field name='name'>Default</field>
+        <field name='api_key'>DUMMY-API-KEY</field>
+        <field name='default_delivery_method_id' ref='delivery.free_delivery_carrier'/>
+    </record>
+
     <record id='ifl_delivery_distance_line_5' model='googlemaps.api.distance.lines'>
         <field name='distance_limit'>5000</field>
         <field name='googlemaps_api_id' ref='ifl_delivery_config_default'/>
