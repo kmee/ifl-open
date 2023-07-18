@@ -2,7 +2,7 @@
 
 ## Informações importantes
 
-Este projeto foi desenvolvido por [KMEE Informtica LTDA.](https://www.kmee.com.br/) para o [Instituto Feira Livre](https://ifl.kmee.com.br/) com financiamento de .
+Este projeto foi desenvolvido por [KMEE Informática LTDA.](https://www.kmee.com.br/) para o [Instituto Feira Livre](https://ifl.kmee.com.br/) com financiamento de .
 
 ## Conteúdo
 
