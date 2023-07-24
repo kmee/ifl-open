@@ -2,7 +2,7 @@
 
 ## Informações importantes
 
-Este projeto foi desenvolvido por [KMEE Informática LTDA.](https://www.kmee.com.br/) para o [Instituto Feira Livre](https://ifl.kmee.com.br/institucional) com financiamento de .
+Este projeto foi desenvolvido por [KMEE Informática LTDA.](https://www.kmee.com.br/) para o [Instituto Feira Livre](https://ifl.kmee.com.br/institucional) com recursos do edital "Ciclo de Inovação Rápida (Covid-19)", da [ADESAMPA - Agência São Paulo de Desenvolvimento](https://adesampa.com.br).
 
 ## Conteúdo
 
